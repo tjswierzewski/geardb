@@ -92,19 +92,19 @@ const App = () => {
               <ListItemText primary="Inventory" />
             </ListItem>
 
-            <ListItem button key="Repair">
+            <ListItem button key="Cases">
               <ListItemIcon>
                 <Mic />
               </ListItemIcon>
-              <ListItemText primary="Repair" />
+              <ListItemText primary="Cases" />
             </ListItem>
           </List>
 
-          <ListItem button key="Cases">
+          <ListItem button key="Repair">
             <ListItemIcon>
               <Build />
             </ListItemIcon>
-            <ListItemText primary="Cases" />
+            <ListItemText primary="Repair" />
           </ListItem>
 
           <Divider />
