@@ -3,14 +3,14 @@ require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 require File.join(File.dirname(__FILE__), 'support/shoulda')
 require File.join(File.dirname(__FILE__), 'support/valid_attribute')
 require File.join(File.dirname(__FILE__), 'support/factory_bot')
 require 'capybara/rspec'
 # Add additional requires below this line. Rails is not loaded until this point!
-
+RSpec.configure { |config| config.include Devise::Test::ControllerHelpers, type: :controller }
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
