@@ -24,12 +24,14 @@
     "redbox-react": "1.6.0"
   },
   "devDependencies": {
+    "@prettier/plugin-ruby": "^1.5.5",
     "@types/jest": "^24.9.0",
     "babel-jest": "^24.9.0",
     "enzyme": "~3.10.0",
     "enzyme-adapter-react-16": "~1.14.0",
     "fetch-mock": "~5.13.1",
     "jest": "^24.9.0",
+    "prettier": "^2.2.1",
     "webpack-cli": "^2.0.10",
     "webpack-dev-server": "^2.11.5"
   },

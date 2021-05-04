@@ -27,7 +27,6 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-
 end
 
 group :development do
@@ -36,20 +35,21 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
 end
 
-
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
-gem 'pry-rails', group: [:development, :test]
+gem 'pry-rails', group: %i[development test]
 gem 'jquery-rails'
-gem 'dotenv-rails', group: [:development, :test]
-gem 'rspec-rails', '3.8.2', group: [:development, :test]
-gem 'capybara', group: [:development, :test]
-gem 'launchy', group: [:development, :test]
-gem 'factory_bot', group: [:development, :test]
-gem 'database_cleaner', group: [:development, :test]
-gem 'valid_attribute', group: [:development, :test]
-gem 'shoulda-matchers', group: [:development, :test], require: false
+gem 'dotenv-rails', group: %i[development test]
+gem 'rspec-rails', '3.8.2', group: %i[development test]
+gem 'capybara', group: %i[development test]
+gem 'launchy', group: %i[development test]
+gem 'factory_bot', group: %i[development test]
+gem 'database_cleaner', group: %i[development test]
+gem 'valid_attribute', group: %i[development test]
+gem 'shoulda-matchers', group: %i[development test], require: false
 gem 'devise'
 gem 'foundation-rails', '~> 6.5'
 gem 'webpacker', '~> 3.3'
+gem 'faker'
+gem 'active_model_serializers', '~> 0.10.0'
