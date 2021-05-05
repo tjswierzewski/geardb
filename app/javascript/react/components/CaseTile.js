@@ -19,26 +19,18 @@ const useStyles = makeStyles({
   }
 });
 
-const ElectronicTile = ({ name, model_number, barcode }) => {
+const CaseTile = ({ prefix, case_number }) => {
   const classes = useStyles();
 
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent className={classes.content}>
         <Typography variant="h5" component="p" display="inline">
-          {name}
-        </Typography>
-        <span></span>
-        <Typography color="textSecondary" component="p" display="inline">
-          {model_number}
-        </Typography>
-        <span></span>
-        <Typography variant="body2" component="p" display="inline">
-          {barcode}
+          {`${prefix}-${case_number}`}
         </Typography>
       </CardContent>
     </Card>
   );
 };
 
-export default ElectronicTile;
+export default CaseTile;
