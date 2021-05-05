@@ -10,7 +10,29 @@ const useStyles = makeStyles((theme) => ({
 }));
 const classes = useStyles;
 
-const CaseForm = () => {
+const CaseForm = ({ addCase }) => {
+  const postCase = async (casePayload) => {
+    try {
+      const response = await fetch('/api/v1/cases', {
+        credentials: 'same-origin',
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(casePayload)
+      });
+      if (!response.ok) {
+        const errorMessage = `${response.status} (${response.statusText})`;
+        throw new Error(errorMessage);
+      }
+      const responseBody = await response.json();
+      addCase(responseBody);
+    } catch (error) {
+      console.error(`Error in Fetch: ${error.message}`);
+    }
+  };
+
   const formik = useFormik({
     initialValues: {
       prefix: '',
@@ -34,7 +56,8 @@ const CaseForm = () => {
       weight: Yup.number().required('Required')
     }),
     onSubmit: (values) => {
-      console.log(values);
+      postCase(values);
+      formik.resetForm();
     }
   });
   return (
@@ -48,8 +71,9 @@ const CaseForm = () => {
           variant="outlined"
           fullWidth
           value={formik.values.prefix}
+          onChange={formik.handleChange}
           error={formik.touched.prefix && Boolean(formik.errors.prefix)}
-          helperText={formik.touched.prefix && formik.errors.prefix ? formik.errors.prefix : ''}
+          helperText={formik.touched.prefix && formik.errors.prefix}
         />
 
         <TextField
@@ -116,7 +140,7 @@ const CaseForm = () => {
           helperText={formik.touched.weight && formik.errors.weight}
         />
 
-        <Button color="primary" variant="contained" fullWidth type="submit">
+        <Button color="primary" variant="contained" fullWidth type="submit" disabled={!formik.dirty}>
           Submit
         </Button>
       </form>

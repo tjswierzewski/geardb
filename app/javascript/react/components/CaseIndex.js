@@ -6,6 +6,10 @@ import CaseTile from './CaseTile';
 const CaseIndex = () => {
   const [cases, setCases] = useState([]);
 
+  const addCase = (newCase) => {
+    setCases([...cases, newCase]);
+  };
+
   const fetchCases = async () => {
     try {
       const response = await fetch('/api/v1/cases');
@@ -31,7 +35,7 @@ const CaseIndex = () => {
     <div>
       <Typography variant="h2">Cases</Typography>
       {casesList}
-      <CaseForm />
+      <CaseForm addCase={addCase} />
     </div>
   );
 };

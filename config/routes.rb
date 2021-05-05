@@ -8,7 +8,7 @@ Rails
     namespace :api do
       namespace :v1 do
         resources :electronics, only: [:index]
-        resources :cases, only: [:index]
+        resources :cases, only: %i[index create]
       end
     end
   end
