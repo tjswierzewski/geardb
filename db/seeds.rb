@@ -10,3 +10,14 @@
     barcode: Faker::Barcode.unique.ean
   )
 end
+
+3.times do
+  Case.create(
+    prefix: 'MA',
+    case_number: Faker::Number.number(digits: 3),
+    height: 48,
+    length: 24,
+    width: 24,
+    weight: 180
+  )
+end
