@@ -5,6 +5,7 @@ class CreateElectronics < ActiveRecord::Migration[5.2]
       t.string :manufacture, null: false
       t.string :model_number, null: false
       t.string :serial_number, null: false
+      t.integer :weight
       t.integer :cost
       t.string :firmware_version
       t.string :software_version

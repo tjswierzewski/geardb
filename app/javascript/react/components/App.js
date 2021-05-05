@@ -19,6 +19,8 @@ import useStyles from '../styles/useStyles';
 import theme from '../themes/theme';
 import { Build, DirectionsBus, FilterNone, Mic } from '@material-ui/icons';
 import GearIndex from './GearIndex';
+import { Grid } from '@material-ui/core';
+import CaseIndex from './CaseIndex';
 
 const App = () => {
   const classes = useStyles();
@@ -111,7 +113,14 @@ const App = () => {
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <GearIndex />
+          <Grid container>
+            <Grid item xs={6}>
+              <CaseIndex />
+            </Grid>
+            <Grid item xs={6}>
+              <GearIndex />
+            </Grid>
+          </Grid>
         </main>
       </div>
     </ThemeProvider>
