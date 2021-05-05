@@ -8,7 +8,7 @@ class Api::V1::CasesController < ApplicationController
     if new_case.save
       render json: new_case, serializer: CaseSerializer
     else
-      render json: { errors: new_case.errors.hash(true) }
+      render json: { errors: new_case.errors.to_hash(true) }, status: :unprocessable_entity
     end
   end
 
