@@ -2,6 +2,11 @@ import { createMuiTheme } from '@material-ui/core';
 import { orange, red } from '@material-ui/core/colors';
 
 const theme = createMuiTheme({
+  props: {
+    MuiTextField: {
+      margin: 'normal'
+    }
+  },
   palette: {
     primary: {
       main: red[800]

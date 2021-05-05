@@ -1,5 +1,6 @@
 import { Typography } from '@material-ui/core';
 import React, { useState, useEffect } from 'react';
+import CaseForm from './CaseForm';
 import CaseTile from './CaseTile';
 
 const CaseIndex = () => {
@@ -30,6 +31,7 @@ const CaseIndex = () => {
     <div>
       <Typography variant="h2">Cases</Typography>
       {casesList}
+      <CaseForm />
     </div>
   );
 };
