@@ -17,11 +17,13 @@
     "@material-ui/icons": "^4.11.2",
     "@rails/webpacker": "3.5",
     "babel-loader": "^8.0.6",
+    "formik": "^2.2.6",
     "prop-types": "~15.6.0",
     "react": "~16.8.0",
     "react-dom": "~16.8.0",
     "react-router-dom": "^5.2.0",
-    "redbox-react": "1.6.0"
+    "redbox-react": "1.6.0",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "@prettier/plugin-ruby": "^1.5.5",
