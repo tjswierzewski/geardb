@@ -12,15 +12,13 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import { ThemeProvider } from '@material-ui/core/styles';
 import useStyles from '../styles/useStyles';
 import theme from '../themes/theme';
 import { Build, DirectionsBus, FilterNone, Mic } from '@material-ui/icons';
 import GearIndex from './GearIndex';
 import { Grid } from '@material-ui/core';
-import CaseIndex from './CaseIndex';
+import CaseContainer from './CaseContainer';
 
 const App = () => {
   const classes = useStyles();
@@ -115,7 +113,7 @@ const App = () => {
           <div className={classes.toolbar} />
           <Grid container>
             <Grid item xs={6}>
-              <CaseIndex />
+              <CaseContainer />
             </Grid>
             <Grid item xs={6}>
               <GearIndex />
