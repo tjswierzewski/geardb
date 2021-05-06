@@ -16,9 +16,9 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import useStyles from '../styles/useStyles';
 import theme from '../themes/theme';
 import { Build, DirectionsBus, FilterNone, Mic } from '@material-ui/icons';
-import GearIndex from './GearIndex';
 import { Grid } from '@material-ui/core';
 import CaseContainer from './CaseContainer';
+import GearContainer from './GearContainer';
 
 const App = () => {
   const classes = useStyles();
@@ -116,7 +116,7 @@ const App = () => {
               <CaseContainer />
             </Grid>
             <Grid item xs={6}>
-              <GearIndex />
+              <GearContainer />
             </Grid>
           </Grid>
         </main>
