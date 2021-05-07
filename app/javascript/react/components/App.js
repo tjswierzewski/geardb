@@ -10,14 +10,14 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <Layout>
-          <Grid container>
-            <Grid item xs={6}>
-              <CaseContainer />
-            </Grid>
-            <Grid item xs={6}>
-              <GearContainer />
-            </Grid>
+        <Grid container>
+          <Grid item xs={6}>
+            <CaseContainer />
           </Grid>
+          <Grid item xs={6}>
+            <GearContainer />
+          </Grid>
+        </Grid>
       </Layout>
     </ThemeProvider>
   );
