@@ -4,7 +4,9 @@ import ElectronicTile from './ElectronicTile';
 
 const GearIndex = ({ electronics }) => {
   const electronicsList = electronics.map(({ id, name, model_number, barcode }) => {
-    return <ElectronicTile key={id} name={name} model_number={model_number} barcode={barcode} />;
+    return (
+      <ElectronicTile key={id} id={id} name={name} model_number={model_number} barcode={barcode} />
+    );
   });
 
   return (

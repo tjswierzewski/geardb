@@ -5,11 +5,14 @@ import { Grid } from '@material-ui/core';
 import CaseContainer from './case/CaseContainer';
 import GearContainer from './Electronic/GearContainer';
 import Layout from './Layout';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      <Layout>
+      <DndProvider backend={HTML5Backend}>
+        <Layout>
           <Grid container>
             <Grid item xs={6}>
               <CaseContainer />
@@ -18,7 +21,8 @@ const App = () => {
               <GearContainer />
             </Grid>
           </Grid>
-      </Layout>
+        </Layout>
+      </DndProvider>
     </ThemeProvider>
   );
 };
