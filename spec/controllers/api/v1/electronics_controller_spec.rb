@@ -68,7 +68,7 @@ RSpec.describe Api::V1::ElectronicsController, type: :controller do
     let!(:electronic1) { FactoryBot.create(:electronic) }
     let!(:case1) { FactoryBot.create(:case) }
     it 'adds a electronic to a case' do
-      post_json = { case_id: case1.id, id: electronic1.id }
+      post_json = { electronic: { id: case1.id }, id: electronic1.id }
       post(:add, params: post_json, format: :json)
       returned_json = JSON.parse(response.body)
 
