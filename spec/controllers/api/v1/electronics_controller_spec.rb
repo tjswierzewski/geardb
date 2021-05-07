@@ -4,7 +4,7 @@ RSpec.describe Api::V1::ElectronicsController, type: :controller do
   let!(:electronics) { FactoryBot.create_list(:electronic, 5) }
 
   describe 'GET#index' do
-    it 'should return a list of all electronics' do
+    it 'returns a list of all electronics' do
       get :index
       returned_json = JSON.parse(response.body)
 
@@ -61,6 +61,20 @@ RSpec.describe Api::V1::ElectronicsController, type: :controller do
       expect(returned_json['errors']['manufacture'].first).to eq "Manufacture can't be blank"
       expect(returned_json['errors']['model_number'].first).to eq "Model number can't be blank"
       expect(returned_json['errors']['serial_number'].first).to eq "Serial number can't be blank"
+    end
+  end
+
+  describe 'POST#add' do
+    let!(:electronic1) { FactoryBot.create(:electronic) }
+    let!(:case1) { FactoryBot.create(:case) }
+    it 'adds a electronic to a case' do
+      post_json = { case_id: case1.id, id: electronic1.id }
+      post(:add, params: post_json, format: :json)
+      returned_json = JSON.parse(response.body)
+
+      expect(returned_json['case']['id']).to be_truthy
+      expect(returned_json['case']['prefix']).to be_truthy
+      expect(returned_json['case']['case_number']).to be_truthy
     end
   end
 end
