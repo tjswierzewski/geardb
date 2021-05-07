@@ -14,7 +14,7 @@ class Api::V1::ElectronicsController < ApplicationController
 
   def add
     electronic = Electronic.find(params[:id])
-    road_case = Case.find(params[:case_id])
+    road_case = Case.find(params[:electronic][:id])
     electronic.case = road_case
     if electronic.save
       render json: electronic, serializer: ElectronicSerializer

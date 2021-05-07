@@ -5,7 +5,7 @@ import CaseTile from './CaseTile';
 
 const CaseIndex = ({ cases }) => {
   const casesList = cases.map(({ id, prefix, case_number }) => {
-    return <CaseTile key={id} prefix={prefix} case_number={case_number} />;
+    return <CaseTile key={id} id={id} prefix={prefix} case_number={case_number} />;
   });
   return (
     <div>

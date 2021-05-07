@@ -1,3 +1,5 @@
 const ItemTypes = {
-  ELECTRONIC = 'electronic'
-}
+  ELECTRONIC: 'electronic'
+};
+
+export default ItemTypes;

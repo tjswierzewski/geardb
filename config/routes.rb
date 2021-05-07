@@ -7,12 +7,10 @@ Rails
 
     namespace :api do
       namespace :v1 do
-        resources :electronics, only: %i[index create]
-        resources :cases, only: %i[index create] do
-          resources :electronics, only: [] do
-            member { post 'add' }
-          end
+        resources :electronics, only: %i[index create] do
+          member { post 'add' }
         end
+        resources :cases, only: %i[index create]
       end
     end
   end
