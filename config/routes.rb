@@ -10,7 +10,9 @@ Rails
         resources :electronics, only: %i[index create] do
           member { post 'add' }
         end
-        resources :cases, only: %i[index create]
+        resources :cases, only: %i[index create] do
+          member { get 'contents' }
+        end
       end
     end
   end

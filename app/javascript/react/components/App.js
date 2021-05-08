@@ -19,7 +19,7 @@ const App = () => {
               <CaseContainer selectedCase={selectedCase} setSelectedCase={setSelectedCase} />
             </Grid>
             <Grid item xs={6}>
-              <GearContainer />
+              <GearContainer selectedCase={selectedCase} />
             </Grid>
           </Grid>
         </Layout>
