@@ -71,10 +71,9 @@ RSpec.describe Api::V1::ElectronicsController, type: :controller do
       post_json = { electronic: { id: case1.id }, id: electronic1.id }
       post(:add, params: post_json, format: :json)
       returned_json = JSON.parse(response.body)
+      electronic = Electronic.find(electronic1.id)
 
-      expect(returned_json['case']['id']).to be_truthy
-      expect(returned_json['case']['prefix']).to be_truthy
-      expect(returned_json['case']['case_number']).to be_truthy
+      expect(electronic.case).to eq case1
     end
   end
 end
