@@ -56,4 +56,25 @@ RSpec.describe Api::V1::CasesController, type: :controller do
       expect(returned_json['errors']['weight'].first).to eq "Weight can't be blank"
     end
   end
+
+  describe 'GET#contents' do
+    let!(:case1) { Case.first }
+    let!(:electronics1) { FactoryBot.create(:electronic, case: case1) }
+    let!(:electronics2) { FactoryBot.create(:electronic, case: case1) }
+    let!(:electronics3) { FactoryBot.create(:electronic, case: case1) }
+    it 'gets the electronics that are in a case' do
+      get :contents, params: { id: case1.id }
+      returned_json = JSON.parse(response.body)
+
+      expect(response.status).to eq 200
+      expect(response.content_type).to eq('application/json')
+
+      expect(returned_json['electronics'].length).to eq 3
+      expect(returned_json['electronics'][0]['name']).to be_truthy
+      expect(returned_json['electronics'][0]['model_number']).to be_truthy
+      expect(returned_json['electronics'][0]['barcode']).to be_truthy
+      expect(returned_json['electronics'][0]['serial_number']).to be_falsey
+      expect(returned_json['electronics'][0]['cost']).to be_falsey
+    end
+  end
 end
