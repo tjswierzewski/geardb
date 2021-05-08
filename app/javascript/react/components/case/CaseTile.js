@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -19,9 +20,12 @@ const useStyles = makeStyles({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  selected: {
+    backgroundColor: '#5fe39c'
   }
 });
-const CaseTile = ({ prefix, case_number, id }) => {
+const CaseTile = ({ prefix, case_number, id, selected }) => {
   const classes = useStyles();
   const [{ isOver }, drop] = useDrop(() => ({
     accept: ItemTypes.ELECTRONIC,
@@ -32,7 +36,7 @@ const CaseTile = ({ prefix, case_number, id }) => {
   }));
   return (
     <div ref={drop}>
-      <Card className={classes.root} variant="outlined">
+      <Card className={clsx(classes.root, { [classes.selected]: selected })} variant="outlined">
         <CardContent className={classes.content}>
           <Typography variant="h5" component="p" display="inline">
             {`${prefix}-${case_number}`}

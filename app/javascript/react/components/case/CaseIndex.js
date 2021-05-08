@@ -1,11 +1,22 @@
 import { Typography } from '@material-ui/core';
 import React from 'react';
-import CaseForm from './CaseForm';
 import CaseTile from './CaseTile';
 
-const CaseIndex = ({ cases }) => {
+const CaseIndex = ({ cases, selectedCase, setSelectedCase }) => {
   const casesList = cases.map(({ id, prefix, case_number }) => {
-    return <CaseTile key={id} id={id} prefix={prefix} case_number={case_number} />;
+    const handleSelect = () => {
+      if (selectedCase === id) {
+        setSelectedCase(null);
+        return;
+      }
+      setSelectedCase(id);
+    };
+    const selected = selectedCase === id;
+    return (
+      <div key={id} onClick={handleSelect}>
+        <CaseTile id={id} prefix={prefix} case_number={case_number} selected={selected} />
+      </div>
+    );
   });
   return (
     <div>

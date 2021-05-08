@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import CaseForm from './CaseForm';
 import CaseIndex from './CaseIndex';
 
-const CaseContainer = () => {
+const CaseContainer = ({ selectedCase, setSelectedCase }) => {
   const [adding, setAdding] = useState(false);
   const [cases, setCases] = useState([]);
 
@@ -36,7 +36,11 @@ const CaseContainer = () => {
 
   return (
     <div>
-      {adding ? <CaseForm addCase={addCase} /> : <CaseIndex cases={cases} />}
+      {adding ? (
+        <CaseForm addCase={addCase} />
+      ) : (
+        <CaseIndex cases={cases} setSelectedCase={setSelectedCase} selectedCase={selectedCase} />
+      )}
       <Fab color="primary" aria-label="add" size="large" onClick={changeAdding}>
         <AddIcon />
       </Fab>
