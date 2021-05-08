@@ -12,6 +12,18 @@ class Api::V1::CasesController < ApplicationController
     end
   end
 
+  def contents
+    selected_case = Case.find(params[:id])
+    electronics =
+      selected_case.electronics.map do |electronic|
+        ActiveModelSerializers::SerializableResource.new(
+          electronic,
+          { serializer: ElectronicSerializer }
+        )
+      end
+    render json: { electronics: electronics }
+  end
+
   private
 
   def case_params
