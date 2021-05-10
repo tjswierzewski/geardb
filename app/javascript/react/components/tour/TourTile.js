@@ -21,12 +21,12 @@ const useStyles = makeStyles({
   }
 });
 
-const TourTile = ({ name, artist }) => {
+const TourTile = ({ name, artist, selected }) => {
   const classes = useStyles();
 
   return (
     <div>
-      <Card className={classes.root} variant="outlined">
+      <Card className={clsx(classes.root, { [classes.selected]: selected })} variant="outlined">
         <CardContent className={classes.content}>
           <Typography variant="h5" component="p" display="inline">
             {name}

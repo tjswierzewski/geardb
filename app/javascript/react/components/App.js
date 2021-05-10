@@ -11,16 +11,21 @@ import TourContainer from './tour/TourContainer';
 
 const App = () => {
   const [selectedCase, setSelectedCase] = useState(null);
+  const [selectedTour, setSelectedTour] = useState(null);
   return (
     <ThemeProvider theme={theme}>
       <DndProvider backend={HTML5Backend}>
         <Layout>
           <Grid container>
             <Grid item xs={4}>
-              <TourContainer />
+              <TourContainer selectedTour={selectedTour} setSelectedTour={setSelectedTour} />
             </Grid>
             <Grid item xs={4}>
-              <CaseContainer selectedCase={selectedCase} setSelectedCase={setSelectedCase} />
+              <CaseContainer
+                selectedCase={selectedCase}
+                setSelectedCase={setSelectedCase}
+                selectedTour={selectedTour}
+              />
             </Grid>
             <Grid item xs={4}>
               <GearContainer selectedCase={selectedCase} />

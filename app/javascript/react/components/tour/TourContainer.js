@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import TourIndex from './TourIndex';
 import TourForm from './TourForm';
 
-const TourContainer = () => {
+const TourContainer = ({ selectedTour, setSelectedTour }) => {
   const [adding, setAdding] = useState(false);
   const [tours, setTours] = useState([]);
 
@@ -36,7 +36,11 @@ const TourContainer = () => {
 
   return (
     <div>
-      {adding ? <TourForm addTour={addTour} /> : <TourIndex tours={tours} />}
+      {adding ? (
+        <TourForm addTour={addTour} />
+      ) : (
+        <TourIndex tours={tours} selectedTour={selectedTour} setSelectedTour={setSelectedTour} />
+      )}
       <Fab color="primary" aria-label="add" size="large" onClick={changeAdding}>
         <AddIcon />
       </Fab>

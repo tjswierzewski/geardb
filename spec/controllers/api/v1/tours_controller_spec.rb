@@ -56,4 +56,27 @@ RSpec.describe Api::V1::ToursController, type: :controller do
       expect(returned_json['errors']['name'].first).to eq "Name can't be blank"
     end
   end
+
+  describe 'GET#contents' do
+    let!(:tour1) { Tour.first }
+    let!(:case1) { FactoryBot.create(:case) }
+    let!(:case2) { FactoryBot.create(:case) }
+    let!(:case3) { FactoryBot.create(:case) }
+    let!(:assignment1) { CaseAssignment.create(case: case1, tour: tour1) }
+    let!(:assignment2) { CaseAssignment.create(case: case2, tour: tour1) }
+    let!(:assignment3) { CaseAssignment.create(case: case3, tour: tour1) }
+    it 'gets the casess that are in a tour' do
+      get :contents, params: { id: tour1.id }
+      returned_json = JSON.parse(response.body)
+
+      expect(response.status).to eq 200
+      expect(response.content_type).to eq('application/json')
+
+      expect(returned_json['cases'].length).to eq 3
+      expect(returned_json['cases'][0]['prefix']).to be_truthy
+      expect(returned_json['cases'][0]['case_number']).to be_truthy
+      expect(returned_json['cases'][0]['barcode']).to be_falsey
+      expect(returned_json['cases'][0]['weight']).to be_falsey
+    end
+  end
 end
