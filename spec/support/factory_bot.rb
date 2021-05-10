@@ -26,4 +26,10 @@ FactoryBot.define do
     width { 24 }
     weight { 180 }
   end
+
+  factory :tour do
+    name { Faker::Esport.event }
+    artist { Faker::Kpop.boy_bands }
+    duration { Faker::Date.backward(days: 250)..Faker::Date.forward(days: 250) }
+  end
 end
