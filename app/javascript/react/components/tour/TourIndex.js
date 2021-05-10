@@ -2,9 +2,21 @@ import { Typography } from '@material-ui/core';
 import React from 'react';
 import TourTile from './TourTile';
 
-const TourIndex = ({ tours }) => {
+const TourIndex = ({ tours, selectedTour, setSelectedTour }) => {
   const tourList = tours.map(({ id, name, artist }) => {
-    return <TourTile key={id} name={name} artist={artist} />;
+    const handleSelect = () => {
+      if (selectedTour === id) {
+        setSelectedTour(null);
+        return;
+      }
+      setSelectedTour(id);
+    };
+    const selected = selectedTour === id;
+    return (
+      <div key={id} onClick={handleSelect}>
+        <TourTile name={name} artist={artist} selected={selected} />
+      </div>
+    );
   });
   return (
     <div>
