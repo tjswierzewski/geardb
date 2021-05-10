@@ -7,6 +7,7 @@ FactoryBot.define do
     password_confirmation { 'password' }
   end
 
+  Faker::UniqueGenerator.clear
   factory :electronic do
     name { Faker::Appliance.equipment }
     manufacture { Faker::Appliance.brand }
@@ -25,5 +26,11 @@ FactoryBot.define do
     length { 24 }
     width { 24 }
     weight { 180 }
+  end
+
+  factory :tour do
+    name { Faker::Esport.event }
+    artist { Faker::Kpop.boy_bands }
+    duration { Faker::Date.backward(days: 250)..Faker::Date.forward(days: 250) }
   end
 end

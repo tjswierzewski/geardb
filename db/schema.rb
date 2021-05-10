@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_05_135429) do
+ActiveRecord::Schema.define(version: 2021_05_10_142358) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "case_assignments", force: :cascade do |t|
+    t.bigint "case_id", null: false
+    t.bigint "tour_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["case_id"], name: "index_case_assignments_on_case_id"
+    t.index ["tour_id"], name: "index_case_assignments_on_tour_id"
+  end
 
   create_table "cases", force: :cascade do |t|
     t.string "prefix", null: false
@@ -40,6 +49,14 @@ ActiveRecord::Schema.define(version: 2021_05_05_135429) do
     t.datetime "updated_at", null: false
     t.bigint "case_id"
     t.index ["case_id"], name: "index_electronics_on_case_id"
+  end
+
+  create_table "tours", force: :cascade do |t|
+    t.string "name", null: false
+    t.daterange "duration", null: false
+    t.string "artist"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

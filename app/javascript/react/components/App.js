@@ -7,6 +7,7 @@ import GearContainer from './electronic/GearContainer';
 import Layout from './Layout';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import TourContainer from './tour/TourContainer';
 
 const App = () => {
   const [selectedCase, setSelectedCase] = useState(null);
@@ -15,10 +16,13 @@ const App = () => {
       <DndProvider backend={HTML5Backend}>
         <Layout>
           <Grid container>
-            <Grid item xs={6}>
+            <Grid item xs={4}>
+              <TourContainer />
+            </Grid>
+            <Grid item xs={4}>
               <CaseContainer selectedCase={selectedCase} setSelectedCase={setSelectedCase} />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={4}>
               <GearContainer selectedCase={selectedCase} />
             </Grid>
           </Grid>
