@@ -7,6 +7,7 @@ FactoryBot.define do
     password_confirmation { 'password' }
   end
 
+  Faker::UniqueGenerator.clear
   factory :electronic do
     name { Faker::Appliance.equipment }
     manufacture { Faker::Appliance.brand }

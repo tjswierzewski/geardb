@@ -1,4 +1,5 @@
-5.times do
+Faker::UniqueGenerator.clear
+15.times do
   Electronic.create(
     name: Faker::Appliance.equipment,
     manufacture: Faker::Appliance.brand,
