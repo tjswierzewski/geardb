@@ -8,6 +8,10 @@ const TourContainer = () => {
   const [adding, setAdding] = useState(false);
   const [tours, setTours] = useState([]);
 
+  const addTour = (newTour) => {
+    setTours([...tours, newTour]);
+  };
+
   const changeAdding = () => {
     setAdding(!adding);
   };
@@ -32,7 +36,7 @@ const TourContainer = () => {
 
   return (
     <div>
-      {adding ? <TourForm /> : <TourIndex tours={tours} />}
+      {adding ? <TourForm addTour={addTour} /> : <TourIndex tours={tours} />}
       <Fab color="primary" aria-label="add" size="large" onClick={changeAdding}>
         <AddIcon />
       </Fab>

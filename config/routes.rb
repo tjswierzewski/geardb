@@ -7,7 +7,7 @@ Rails
 
     namespace :api do
       namespace :v1 do
-        resources :tours, only: [:index]
+        resources :tours, only: %i[index create]
         resources :electronics, only: %i[index create] do
           member { post 'add' }
         end
