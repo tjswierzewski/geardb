@@ -1,8 +1,16 @@
+import { Fab } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
 import React, { useState, useEffect } from 'react';
 import TourIndex from './TourIndex';
+import TourForm from './TourForm';
 
 const TourContainer = () => {
+  const [adding, setAdding] = useState(false);
   const [tours, setTours] = useState([]);
+
+  const changeAdding = () => {
+    setAdding(!adding);
+  };
 
   const fetchTours = async () => {
     try {
@@ -24,7 +32,10 @@ const TourContainer = () => {
 
   return (
     <div>
-      <TourIndex tours={tours} />
+      {adding ? <TourForm /> : <TourIndex tours={tours} />}
+      <Fab color="primary" aria-label="add" size="large" onClick={changeAdding}>
+        <AddIcon />
+      </Fab>
     </div>
   );
 };
