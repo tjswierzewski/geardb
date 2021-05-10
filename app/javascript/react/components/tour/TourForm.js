@@ -30,7 +30,7 @@ const TourForm = ({ addTour }) => {
         throw new Error(errorMessage);
       }
       const responseBody = await response.json();
-      addtour(responseBody);
+      addTour(responseBody);
     } catch (error) {
       console.error(`Error in Fetch: ${error.message}`);
     }
@@ -50,7 +50,7 @@ const TourForm = ({ addTour }) => {
       end_date: Yup.date().required('Required')
     }),
     onSubmit: (values) => {
-      postCase(values);
+      postTour(values);
       formik.resetForm();
     }
   });
