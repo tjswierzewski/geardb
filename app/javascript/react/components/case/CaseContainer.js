@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import CaseForm from './CaseForm';
 import CaseIndex from './CaseIndex';
 
-const CaseContainer = ({ selectedCase, setSelectedCase }) => {
+const CaseContainer = ({ selectedCase, setSelectedCase, selectedTour }) => {
   const [adding, setAdding] = useState(false);
   const [cases, setCases] = useState([]);
 
@@ -30,9 +30,27 @@ const CaseContainer = ({ selectedCase, setSelectedCase }) => {
     }
   };
 
+  const fetchTourCases = async () => {
+    try {
+      const response = await fetch(`/api/v1/tours/${selectedTour}/contents`);
+      if (!response.ok) {
+        const errorMessage = `${response.status} (${response.statusText})`;
+        throw new Error(errorMessage);
+      }
+      const responseBody = await response.json();
+      setCases(responseBody.cases);
+    } catch (error) {
+      console.error(`Error in Fetch: ${error.message}`);
+    }
+  };
+
   useEffect(() => {
-    fetchCases();
-  }, []);
+    if (selectedTour === null) {
+      fetchCases();
+      return;
+    }
+    fetchTourCases();
+  }, [selectedTour]);
 
   return (
     <div>

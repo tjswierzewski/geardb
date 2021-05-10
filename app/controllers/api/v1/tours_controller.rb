@@ -12,6 +12,15 @@ class Api::V1::ToursController < ApplicationController
     end
   end
 
+  def contents
+    selected_tour = Tour.find(params[:id])
+    cases =
+      selected_tour.cases.map do |road_case|
+        ActiveModelSerializers::SerializableResource.new(road_case, { serializer: CaseSerializer })
+      end
+    render json: { cases: cases }
+  end
+
   private
 
   def tour_params

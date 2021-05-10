@@ -21,7 +21,11 @@ const App = () => {
               <TourContainer selectedTour={selectedTour} setSelectedTour={setSelectedTour} />
             </Grid>
             <Grid item xs={4}>
-              <CaseContainer selectedCase={selectedCase} setSelectedCase={setSelectedCase} />
+              <CaseContainer
+                selectedCase={selectedCase}
+                setSelectedCase={setSelectedCase}
+                selectedTour={selectedTour}
+              />
             </Grid>
             <Grid item xs={4}>
               <GearContainer selectedCase={selectedCase} />
