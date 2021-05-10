@@ -31,7 +31,7 @@ const TourTile = ({ name, artist }) => {
           <Typography variant="h5" component="p" display="inline">
             {name}
           </Typography>
-          <Typography variant="p" component="p" display="inline">
+          <Typography component="p" display="inline">
             {artist}
           </Typography>
         </CardContent>
