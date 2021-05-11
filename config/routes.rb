@@ -15,6 +15,7 @@ Rails
         end
         resources :cases, only: %i[index create] do
           member { get 'contents' }
+          member { post 'add' }
         end
       end
     end

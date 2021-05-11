@@ -77,4 +77,17 @@ RSpec.describe Api::V1::CasesController, type: :controller do
       expect(returned_json['electronics'][0]['cost']).to be_falsey
     end
   end
+
+  describe 'POST#add' do
+    let!(:case1) { FactoryBot.create(:case) }
+    let!(:tour1) { FactoryBot.create(:tour) }
+    it 'adds a case to a tour' do
+      post_json = { case: { id: tour1.id }, id: case1.id }
+      post(:add, params: post_json, format: :json)
+      returned_json = JSON.parse(response.body)
+      tour = Tour.find(tour1.id)
+
+      expect(tour.cases).to eq [case1]
+    end
+  end
 end

@@ -24,6 +24,17 @@ class Api::V1::CasesController < ApplicationController
     render json: { electronics: electronics }
   end
 
+  def add
+    road_case = Case.find(params[:id])
+    tour = Tour.find(params[:case][:id])
+    tour.cases << road_case
+    if tour.save
+      render json: road_case, serializer: CaseSerializer
+    else
+      render json: { errors: road_case.errors.to_hash(true) }, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def case_params
