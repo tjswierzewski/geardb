@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import ItemTypes from '../../constants/ItemTypes';
-import { useDrop } from 'react-dnd';
+import { useDrop, useDrag } from 'react-dnd';
 import postElectronictoCase from '../../logic/PostElectronicToCase';
 
 const useStyles = makeStyles({
@@ -26,7 +26,17 @@ const useStyles = makeStyles({
   }
 });
 const CaseTile = ({ prefix, case_number, id, selected }) => {
+  const ref = useRef(null);
   const classes = useStyles();
+
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: ItemTypes.CASE,
+    item: { id },
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging()
+    })
+  }));
+
   const [{ isOver }, drop] = useDrop(() => ({
     accept: ItemTypes.ELECTRONIC,
     drop: (item) => postElectronictoCase(item.id, { id }),
@@ -34,8 +44,9 @@ const CaseTile = ({ prefix, case_number, id, selected }) => {
       isOver: !!monitor.isOver()
     })
   }));
+  drag(drop(ref));
   return (
-    <div ref={drop}>
+    <div ref={ref}>
       <Card className={clsx(classes.root, { [classes.selected]: selected })} variant="outlined">
         <CardContent className={classes.content}>
           <Typography variant="h5" component="p" display="inline">

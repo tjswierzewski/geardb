@@ -14,7 +14,7 @@ const TourIndex = ({ tours, selectedTour, setSelectedTour }) => {
     const selected = selectedTour === id;
     return (
       <div key={id} onClick={handleSelect}>
-        <TourTile name={name} artist={artist} selected={selected} />
+        <TourTile id={id} name={name} artist={artist} selected={selected} />
       </div>
     );
   });
