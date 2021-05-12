@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     position: 'relative',
     overflow: 'auto',
-    maxHeight: 700
+    maxHeight: 'calc(100vh - 250px)'
   }
 }));
 
