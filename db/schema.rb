@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_10_142358) do
+ActiveRecord::Schema.define(version: 2021_05_12_191410) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,26 @@ ActiveRecord::Schema.define(version: 2021_05_10_142358) do
     t.datetime "updated_at", null: false
     t.bigint "case_id"
     t.index ["case_id"], name: "index_electronics_on_case_id"
+  end
+
+  create_table "shop_transfers", force: :cascade do |t|
+    t.bigint "shop_id", null: false
+    t.string "inventoryable_type"
+    t.bigint "inventoryable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["inventoryable_type", "inventoryable_id"], name: "index_shop_transfers_on_inventoryable_type_and_inventoryable_id"
+    t.index ["shop_id"], name: "index_shop_transfers_on_shop_id"
+  end
+
+  create_table "shops", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "address", null: false
+    t.string "city", null: false
+    t.string "state", null: false
+    t.string "zipcode", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tours", force: :cascade do |t|
