@@ -1,8 +1,18 @@
-import { Typography } from '@material-ui/core';
+import { Grid, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
 import TourTile from './TourTile';
 
+const useStyles = makeStyles((theme) => ({
+  scrollList: {
+    width: '100%',
+    position: 'relative',
+    overflow: 'auto',
+    maxHeight: 700
+  }
+}));
+
 const TourIndex = ({ tours, selectedTour, setSelectedTour }) => {
+  const classes = useStyles();
   const tourList = tours.map(({ id, name, artist }) => {
     const handleSelect = () => {
       if (selectedTour === id) {
@@ -21,7 +31,7 @@ const TourIndex = ({ tours, selectedTour, setSelectedTour }) => {
   return (
     <div>
       <Typography variant="h2">Tours</Typography>
-      {tourList}
+      <Grid className={classes.scrollList}>{tourList}</Grid>
     </div>
   );
 };
