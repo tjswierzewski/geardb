@@ -28,7 +28,7 @@ const App = () => {
               />
             </Grid>
             <Grid item xs={4}>
-              <GearContainer selectedCase={selectedCase} />
+              <GearContainer selectedCase={selectedCase} selectedTour={selectedTour} />
             </Grid>
           </Grid>
         </Layout>

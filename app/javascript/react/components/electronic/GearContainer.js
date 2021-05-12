@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import GearForm from './GearForm';
 import GearIndex from './GearIndex';
 
-const GearContainer = ({ selectedCase }) => {
+const GearContainer = ({ selectedCase, selectedTour }) => {
   const [adding, setAdding] = useState(false);
   const [electronics, setElectronics] = useState([]);
 
@@ -44,13 +44,31 @@ const GearContainer = ({ selectedCase }) => {
     }
   };
 
+  const fetchTourElectronics = async () => {
+    try {
+      const response = await fetch(`/api/v1/tours/${selectedTour}/items`);
+      if (!response.ok) {
+        const errorMessage = `${response.status} (${response.statusText})`;
+        throw new Error(errorMessage);
+      }
+      const responseBody = await response.json();
+      setElectronics(responseBody.electronics);
+    } catch (error) {
+      console.error(`Error in Fetch: ${error.message}`);
+    }
+  };
+
   useEffect(() => {
-    if (selectedCase === null) {
-      fetchElectronics();
+    if (!(selectedCase === null)) {
+      fetchCaseElectronics();
       return;
     }
-    fetchCaseElectronics();
-  }, [selectedCase]);
+    if (!(selectedTour === null)) {
+      fetchTourElectronics();
+      return;
+    }
+    fetchElectronics();
+  }, [selectedCase, selectedTour]);
 
   return (
     <div>
