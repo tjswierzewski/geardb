@@ -9,6 +9,7 @@ Rails
       namespace :v1 do
         resources :tours, only: %i[index create] do
           member { get 'contents' }
+          member { get 'items' }
         end
         resources :electronics, only: %i[index create] do
           member { post 'add' }

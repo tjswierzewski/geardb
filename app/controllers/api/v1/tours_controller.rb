@@ -21,6 +21,21 @@ class Api::V1::ToursController < ApplicationController
     render json: { cases: cases }
   end
 
+  def items
+    selected_tour = Tour.find(params[:id])
+    items =
+      selected_tour.cases.map do |road_case|
+        road_case.electronics.map do |electronic|
+          ActiveModelSerializers::SerializableResource.new(
+            electronic,
+            { serializer: ElectronicSerializer }
+          )
+        end
+      end
+    items.flatten!
+    render json: { electronics: items }
+  end
+
   private
 
   def tour_params
