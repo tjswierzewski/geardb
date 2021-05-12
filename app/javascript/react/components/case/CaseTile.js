@@ -19,7 +19,11 @@ const useStyles = makeStyles({
   content: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    padding: 0,
+    '&:last-child': {
+      paddingBottom: 0
+    }
   },
   selected: {
     backgroundColor: '#5fe39c'
