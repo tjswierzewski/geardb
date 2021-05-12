@@ -1,8 +1,18 @@
-import { Typography } from '@material-ui/core';
+import { Typography, makeStyles, Grid } from '@material-ui/core';
 import React from 'react';
 import CaseTile from './CaseTile';
 
+const useStyles = makeStyles((theme) => ({
+  scrollList: {
+    width: '100%',
+    position: 'relative',
+    overflow: 'auto',
+    maxHeight: 700
+  }
+}));
+
 const CaseIndex = ({ cases, selectedCase, setSelectedCase }) => {
+  const classes = useStyles();
   const casesList = cases.map(({ id, prefix, case_number }) => {
     const handleSelect = () => {
       if (selectedCase === id) {
@@ -21,7 +31,7 @@ const CaseIndex = ({ cases, selectedCase, setSelectedCase }) => {
   return (
     <div>
       <Typography variant="h2">Cases</Typography>
-      {casesList}
+      <Grid className={classes.scrollList}>{casesList}</Grid>
     </div>
   );
 };
