@@ -29,8 +29,15 @@ const UserSignInForm = ({ handleClose }) => {
         const errorMessage = `${response.status} (${response.statusText})`;
         throw new Error(errorMessage);
       }
-      const responseBody = await response.json();
-      setUser(responseBody.data);
+      const headers = response.headers;
+      const user = {
+        accessToken: headers.get('access-token'),
+        tokenType: headers.get('token-type'),
+        client: headers.get('client'),
+        expiry: headers.get('expiry'),
+        uid: headers.get('uid')
+      };
+      setUser(user);
       handleClose();
     } catch (error) {
       console.error(`Error in Fetch: ${error.message}`);
