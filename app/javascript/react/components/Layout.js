@@ -14,8 +14,10 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Build, DirectionsBus, FilterNone, Mic, PinDropSharp } from '@material-ui/icons';
+import UserSignup from './user/UserSignup';
+import UserSignIn from './user/UserSignIn';
 
-const Layout = ({children}) => {
+const Layout = ({ children }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
@@ -40,6 +42,8 @@ const Layout = ({children}) => {
             GearDB
           </Typography>
         </Toolbar>
+        <UserSignup />
+        <UserSignIn />
       </AppBar>
       <Drawer
         variant="permanent"
@@ -106,8 +110,9 @@ const Layout = ({children}) => {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         {children}
-        </main>
-      </div> );
-}
+      </main>
+    </div>
+  );
+};
 
 export default Layout;
