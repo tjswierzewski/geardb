@@ -15,6 +15,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Build, DirectionsBus, FilterNone, Mic, PinDropSharp } from '@material-ui/icons';
 import UserSignup from './user/UserSignup';
+import UserSignIn from './user/UserSignIn';
 
 const Layout = ({ children }) => {
   const classes = useStyles();
@@ -42,6 +43,7 @@ const Layout = ({ children }) => {
           </Typography>
         </Toolbar>
         <UserSignup />
+        <UserSignIn />
       </AppBar>
       <Drawer
         variant="permanent"
