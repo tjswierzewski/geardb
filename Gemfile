@@ -49,6 +49,8 @@ gem 'database_cleaner', group: %i[development test]
 gem 'valid_attribute', group: %i[development test]
 gem 'shoulda-matchers', group: %i[development test], require: false
 gem 'devise'
+gem 'devise_token_auth'
+gem 'omniauth'
 gem 'foundation-rails', '~> 6.5'
 gem 'webpacker', '~> 3.3'
 gem 'faker'
