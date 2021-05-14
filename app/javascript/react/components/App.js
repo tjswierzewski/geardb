@@ -8,14 +8,16 @@ import Layout from './Layout';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import TourContainer from './tour/TourContainer';
+import useUser from '../logic/useUser';
 
 const App = () => {
+  const { user, setUser, removeUser } = useUser();
   const [selectedCase, setSelectedCase] = useState(null);
   const [selectedTour, setSelectedTour] = useState(null);
   return (
     <ThemeProvider theme={theme}>
       <DndProvider backend={HTML5Backend}>
-        <Layout>
+        <Layout user={user} setUser={setUser} removeUser={removeUser}>
           <Grid container>
             <Grid item xs={4}>
               <TourContainer selectedTour={selectedTour} setSelectedTour={setSelectedTour} />

@@ -2,7 +2,6 @@ import { Button, makeStyles, TextField } from '@material-ui/core';
 import { useFormik } from 'formik';
 import React from 'react';
 import * as Yup from 'yup';
-import useUser from '../../logic/useUser';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -11,9 +10,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const classes = useStyles;
 
-const UserSignInForm = ({ handleClose }) => {
-  const { setUser } = useUser();
-
+const UserSignInForm = ({ handleClose, setUser }) => {
   const signInUser = async (userInfo) => {
     try {
       const response = await fetch('/api/v1/auth/sign_in', {

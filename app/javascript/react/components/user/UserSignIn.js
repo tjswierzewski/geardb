@@ -1,7 +1,7 @@
 import { Button, Dialog, DialogContentText, DialogTitle } from '@material-ui/core';
 import React, { useState } from 'react';
 import UserSignInForm from './UserSignInForm';
-const UserSignIn = () => {
+const UserSignIn = ({ setUser }) => {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -20,7 +20,7 @@ const UserSignIn = () => {
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Sign Up</DialogTitle>
         <DialogContentText>Please sign up to use these services</DialogContentText>
-        <UserSignInForm handleClose={handleClose} />
+        <UserSignInForm handleClose={handleClose} setUser={setUser} />
       </Dialog>
     </div>
   );
