@@ -16,8 +16,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { Build, DirectionsBus, FilterNone, Mic, PinDropSharp } from '@material-ui/icons';
 import UserSignup from './user/UserSignup';
 import UserSignIn from './user/UserSignIn';
+import UserLogOut from './user/UserLogOut';
 
-const Layout = ({ children }) => {
+const Layout = ({ user, setUser, removeUser, children }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
@@ -43,7 +44,8 @@ const Layout = ({ children }) => {
           </Typography>
         </Toolbar>
         <UserSignup />
-        <UserSignIn />
+        <UserSignIn setUser={setUser} />
+        <UserLogOut user={user} removeUser={removeUser} />
       </AppBar>
       <Drawer
         variant="permanent"
