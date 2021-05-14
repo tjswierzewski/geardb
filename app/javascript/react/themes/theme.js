@@ -7,6 +7,13 @@ const theme = createMuiTheme({
       margin: 'normal'
     }
   },
+  overrides: {
+    MuiDialog: {
+      paper: {
+        padding: '1.5rem'
+      }
+    }
+  },
   palette: {
     primary: {
       main: red[800]

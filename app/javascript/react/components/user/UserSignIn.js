@@ -15,7 +15,7 @@ const UserSignIn = ({ setUser }) => {
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
-        User Sign In
+        Sign In
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Sign Up</DialogTitle>
