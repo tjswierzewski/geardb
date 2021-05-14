@@ -14,8 +14,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Build, DirectionsBus, FilterNone, Mic, PinDropSharp } from '@material-ui/icons';
-import UserSignup from './user/UserSignup';
 import UserSignIn from './user/UserSignIn';
+import UserSignup from './user/UserSignup';
 import UserLogOut from './user/UserLogOut';
 
 const Layout = ({ user, setUser, removeUser, children }) => {
@@ -42,10 +42,12 @@ const Layout = ({ user, setUser, removeUser, children }) => {
           <Typography variant="h4" noWrap>
             GearDB
           </Typography>
+          <div className={classes.userActions}>
+            {user ? null : <UserSignIn setUser={setUser} />}
+            {user ? null : <UserSignup />}
+            {user ? <UserLogOut user={user} removeUser={removeUser} /> : null}
+          </div>
         </Toolbar>
-        <UserSignup />
-        <UserSignIn setUser={setUser} />
-        <UserLogOut user={user} removeUser={removeUser} />
       </AppBar>
       <Drawer
         variant="permanent"

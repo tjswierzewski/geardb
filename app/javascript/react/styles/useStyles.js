@@ -60,6 +60,14 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3)
+  },
+  userActions: {
+    marginLeft: 'auto',
+    display: 'flex',
+    '& button': {
+      minWidth: '7rem',
+      margin: '.3rem'
+    }
   }
 }));
 
