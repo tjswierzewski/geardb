@@ -1,24 +1,77 @@
-# README
+# The Daily Buzz
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Description
 
-Things you may want to cover:
+Geardb is a inventory management app for rental companies. It is designed for companies that focus on live events but could cover many needs. It allows tracking of your equipment as well as which employees prepared it. Equipment can be organized in to cases and cases can be placed on tours. Users can only see inventory for the shop they work for.
 
-* Ruby version
+Created by: Tim Swierzewski
 
-* System dependencies
+---
 
-* Configuration
+## Live Site
 
-* Database creation
+Test User:
 
-* Database initialization
+- Email: thisismail@gmail.com
+- PW: testing
 
-* How to run the test suite
+Visit: https://geardb.herokuapp.com
 
-* Services (job queues, cache servers, search engines, etc.)
+---
 
-* Deployment instructions
+## Setup Locally
 
-* ...
+Clone the repository from GitHub:
+
+```
+git clone https://github.com/tjswierzewski/geardb
+```
+
+Change to directory and install dependencies:
+
+```
+cd geardb
+bundle install
+yarn install
+```
+
+Create and set up database:
+
+```
+bundle exec rake db:create
+bundle exec rake db:migrate
+bundle exec rake db:seed
+```
+
+In your terminal start your server:
+
+```
+bundle exec rails s
+bundle exec yarn start
+```
+
+Finally, navigate to http://localhost:3000 in your browser.
+
+---
+
+## TODO
+
+- [ ] Picture uploading for users and gear
+
+- [ ] Web socket for indexes
+
+- [ ] Search bars
+
+- [ ] Barcode scanning
+
+- [ ] Different views (eg. Inventory only, Tour with crew index)
+
+### Contribution Guidelines
+
+If you find issues or bugs with this application, please add an issue on GitHub. If you would like to add a feature, please create a pull request and it will be reviewed accordingly.
+
+### License
+
+The project is available as open source under the terms of the MIT License.
+
+[![Codeship Status for tjswierzewski/geardb](https://app.codeship.com/projects/f49c3404-924c-4a9a-af20-33c1185e87fe/status?branch=master)](https://app.codeship.com/projects/443436)
