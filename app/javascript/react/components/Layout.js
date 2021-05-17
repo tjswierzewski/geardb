@@ -17,6 +17,7 @@ import { Build, DirectionsBus, FilterNone, Mic, PinDropSharp } from '@material-u
 import UserSignIn from './user/UserSignIn';
 import UserSignup from './user/UserSignup';
 import UserLogOut from './user/UserLogOut';
+import logo from '../../../assets/images/logo_size_invert';
 
 const Layout = ({ user, setUser, removeUser, children }) => {
   const classes = useStyles();
@@ -42,6 +43,9 @@ const Layout = ({ user, setUser, removeUser, children }) => {
           <Typography variant="h4" noWrap>
             GearDB
           </Typography>
+          <div>
+            <img src={logo} alt="logo" style={{ padding: '.45rem' }} />
+          </div>
           <div className={classes.userActions}>
             {user ? null : <UserSignIn setUser={setUser} />}
             {user ? null : <UserSignup />}

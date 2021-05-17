@@ -12,11 +12,19 @@ const theme = createMuiTheme({
       paper: {
         padding: '1.5rem'
       }
+    },
+    MuiButton: {
+      label: {
+        color: 'white'
+      },
+      outlined: {
+        borderColor: 'white'
+      }
     }
   },
   palette: {
     primary: {
-      main: red[800]
+      main: '#E41B23'
     },
     secondary: {
       main: orange[800]
