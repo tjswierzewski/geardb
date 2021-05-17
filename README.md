@@ -15,7 +15,7 @@ Test User:
 - Email: thisismail@gmail.com
 - PW: testing
 
-Visit: https://geardb.herokuapp.com
+Visit: <https://geardb.herokuapp.com>
 
 ---
 
@@ -23,34 +23,34 @@ Visit: https://geardb.herokuapp.com
 
 Clone the repository from GitHub:
 
-```
-git clone https://github.com/tjswierzewski/geardb
+```zsh
+  git clone https://github.com/tjswierzewski/geardb
 ```
 
 Change to directory and install dependencies:
 
-```
-cd geardb
-bundle install
-yarn install
+```zsh
+  cd geardb
+  bundle install
+  yarn install
 ```
 
 Create and set up database:
 
-```
-bundle exec rake db:create
-bundle exec rake db:migrate
-bundle exec rake db:seed
+```zsh
+  bundle exec rake db:create
+  bundle exec rake db:migrate
+  bundle exec rake db:seed
 ```
 
 In your terminal start your server:
 
-```
-bundle exec rails s
-bundle exec yarn start
+```zsh
+  bundle exec rails s
+  bundle exec yarn start
 ```
 
-Finally, navigate to http://localhost:3000 in your browser.
+Finally, navigate to <http://localhost:3000> in your browser.
 
 ---
 
