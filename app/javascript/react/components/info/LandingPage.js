@@ -12,6 +12,9 @@ const useStyles = makeStyles({
   description: {
     maxWidth: '800px',
     margin: '1.5rem auto'
+  },
+  tagline: {
+    margin: '.2rem'
   }
 });
 const LandingPage = () => {
@@ -34,7 +37,7 @@ const LandingPage = () => {
         items have been assigned to them.
       </Typography>
 
-      <Typography variant="subtitle2">
+      <Typography className={classes.tagline} variant="subtitle2" align="center">
         This app was created by{' '}
         <a href="https://www.linkedin.com/in/timothy-swierzewski/">Tim Swierzewski</a> and the source
         code is hosted on <a href="https://github.com/tjswierzewski/geardb">GitHub</a>
