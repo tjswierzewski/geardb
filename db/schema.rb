@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_13_180410) do
+ActiveRecord::Schema.define(version: 2021_05_17_180016) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(version: 2021_05_13_180410) do
     t.integer "weight", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "shop_id"
+    t.index ["shop_id"], name: "index_cases_on_shop_id"
   end
 
   create_table "electronics", force: :cascade do |t|
@@ -77,6 +79,8 @@ ActiveRecord::Schema.define(version: 2021_05_13_180410) do
     t.string "artist"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "shop_id"
+    t.index ["shop_id"], name: "index_tours_on_shop_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -98,11 +102,16 @@ ActiveRecord::Schema.define(version: 2021_05_13_180410) do
     t.json "tokens"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "shop_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["shop_id"], name: "index_users_on_shop_id"
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "cases", "shops"
   add_foreign_key "electronics", "cases"
+  add_foreign_key "tours", "shops"
+  add_foreign_key "users", "shops"
 end
