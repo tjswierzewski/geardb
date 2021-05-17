@@ -21,24 +21,9 @@ import logo from '../../../assets/images/logo_size_invert';
 
 const Layout = ({ user, setUser, removeUser, children }) => {
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-
   return (
     <div className={classes.root}>
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open
-        })}
-      >
+      <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h4" noWrap>
             GearDB
@@ -53,69 +38,6 @@ const Layout = ({ user, setUser, removeUser, children }) => {
           </div>
         </Toolbar>
       </AppBar>
-      <Drawer
-        variant="permanent"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open
-        })}
-        classes={{
-          paper: clsx({
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open
-          })
-        }}
-      >
-        <div className={classes.toolbar}>
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </div>
-        <div style={{ marginTop: '.7rem' }}></div>
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          onClick={handleDrawerOpen}
-          edge="start"
-          className={clsx({
-            [classes.hide]: open
-          })}
-        >
-          <MenuIcon />
-        </IconButton>
-        <Divider />
-        <List>
-          <ListItem button key="Tours">
-            <ListItemIcon>
-              <DirectionsBus />
-            </ListItemIcon>
-            <ListItemText primary="Tours" />
-          </ListItem>
-
-          <ListItem button key="Inventory">
-            <ListItemIcon>
-              <FilterNone />
-            </ListItemIcon>
-            <ListItemText primary="Inventory" />
-          </ListItem>
-
-          <ListItem button key="Cases">
-            <ListItemIcon>
-              <Mic />
-            </ListItemIcon>
-            <ListItemText primary="Cases" />
-          </ListItem>
-        </List>
-
-        <ListItem button key="Repair">
-          <ListItemIcon>
-            <Build />
-          </ListItemIcon>
-          <ListItemText primary="Repair" />
-        </ListItem>
-
-        <Divider />
-      </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
         {children}
