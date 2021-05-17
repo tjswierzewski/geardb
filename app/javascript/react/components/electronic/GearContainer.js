@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import GearForm from './GearForm';
 import GearIndex from './GearIndex';
 
-const GearContainer = ({ selectedCase, selectedTour }) => {
+const GearContainer = ({ selectedCase, selectedTour, currentUser, setUser }) => {
   const [adding, setAdding] = useState(false);
   const [electronics, setElectronics] = useState([]);
 
@@ -18,13 +18,30 @@ const GearContainer = ({ selectedCase, selectedTour }) => {
 
   const fetchElectronics = async () => {
     try {
-      const response = await fetch('/api/v1/electronics');
+      const response = await fetch('/api/v1/electronics', {
+        headers: {
+          'access-token': currentUser.accessToken,
+          'token-type': currentUser.tokenType,
+          client: currentUser.client,
+          expiry: currentUser.expiry,
+          uid: currentUser.uid
+        }
+      });
       if (!response.ok) {
         const errorMessage = `${response.status} (${response.statusText})`;
         throw new Error(errorMessage);
       }
       const responseBody = await response.json();
       setElectronics(responseBody);
+      const headers = response.headers;
+      const user = {
+        accessToken: headers.get('access-token'),
+        tokenType: headers.get('token-type'),
+        client: headers.get('client'),
+        expiry: headers.get('expiry'),
+        uid: headers.get('uid')
+      };
+      setUser(user);
     } catch (error) {
       console.error(`Error in Fetch: ${error.message}`);
     }
@@ -32,13 +49,30 @@ const GearContainer = ({ selectedCase, selectedTour }) => {
 
   const fetchCaseElectronics = async () => {
     try {
-      const response = await fetch(`/api/v1/cases/${selectedCase}/contents`);
+      const response = await fetch(`/api/v1/cases/${selectedCase}/contents`, {
+        headers: {
+          'access-token': currentUser.accessToken,
+          'token-type': currentUser.tokenType,
+          client: currentUser.client,
+          expiry: currentUser.expiry,
+          uid: currentUser.uid
+        }
+      });
       if (!response.ok) {
         const errorMessage = `${response.status} (${response.statusText})`;
         throw new Error(errorMessage);
       }
       const responseBody = await response.json();
       setElectronics(responseBody.electronics);
+      const headers = response.headers;
+      const user = {
+        accessToken: headers.get('access-token'),
+        tokenType: headers.get('token-type'),
+        client: headers.get('client'),
+        expiry: headers.get('expiry'),
+        uid: headers.get('uid')
+      };
+      setUser(user);
     } catch (error) {
       console.error(`Error in Fetch: ${error.message}`);
     }
@@ -46,13 +80,30 @@ const GearContainer = ({ selectedCase, selectedTour }) => {
 
   const fetchTourElectronics = async () => {
     try {
-      const response = await fetch(`/api/v1/tours/${selectedTour}/items`);
+      const response = await fetch(`/api/v1/tours/${selectedTour}/items`, {
+        headers: {
+          'access-token': user.accessToken,
+          'token-type': user.tokenType,
+          client: user.client,
+          expiry: user.expiry,
+          uid: user.uid
+        }
+      });
       if (!response.ok) {
         const errorMessage = `${response.status} (${response.statusText})`;
         throw new Error(errorMessage);
       }
       const responseBody = await response.json();
       setElectronics(responseBody.electronics);
+      const headers = response.headers;
+      const user = {
+        accessToken: headers.get('access-token'),
+        tokenType: headers.get('token-type'),
+        client: headers.get('client'),
+        expiry: headers.get('expiry'),
+        uid: headers.get('uid')
+      };
+      setUser(user);
     } catch (error) {
       console.error(`Error in Fetch: ${error.message}`);
     }

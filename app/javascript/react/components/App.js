@@ -21,17 +21,29 @@ const App = () => {
       return (
         <Grid container>
           <Grid item xs={4}>
-            <TourContainer selectedTour={selectedTour} setSelectedTour={setSelectedTour} />
+            <TourContainer
+              selectedTour={selectedTour}
+              setSelectedTour={setSelectedTour}
+              currentUser={user}
+              setUser={setUser}
+            />
           </Grid>
           <Grid item xs={4}>
             <CaseContainer
               selectedCase={selectedCase}
               setSelectedCase={setSelectedCase}
               selectedTour={selectedTour}
+              currentUser={user}
+              setUser={setUser}
             />
           </Grid>
           <Grid item xs={4}>
-            <GearContainer selectedCase={selectedCase} selectedTour={selectedTour} />
+            <GearContainer
+              selectedCase={selectedCase}
+              selectedTour={selectedTour}
+              currentUser={user}
+              setUser={setUser}
+            />
           </Grid>
         </Grid>
       );
