@@ -1,7 +1,15 @@
 class Api::V1::ElectronicsController < ApplicationController
   before_action :authenticate_api_v1_user!
   def index
-    render json: Electronic.all
+    shop = current_api_v1_user.shop
+    electronics =
+      shop.electronics.map do |electronic|
+        ActiveModelSerializers::SerializableResource.new(
+          electronic,
+          { serializer: ElectronicSerializer }
+        )
+      end
+    render json: { electronics: electronics }
   end
 
   def create

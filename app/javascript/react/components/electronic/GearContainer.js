@@ -32,7 +32,7 @@ const GearContainer = ({ selectedCase, selectedTour, currentUser, setUser }) => 
         throw new Error(errorMessage);
       }
       const responseBody = await response.json();
-      setElectronics(responseBody);
+      setElectronics(responseBody.electronics);
       const headers = response.headers;
       const user = {
         accessToken: headers.get('access-token'),
