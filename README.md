@@ -74,4 +74,4 @@ If you find issues or bugs with this application, please add an issue on GitHub.
 
 The project is available as open source under the terms of the MIT License.
 
-[![Codeship Status for tjswierzewski/geardb](https://app.codeship.com/projects/f49c3404-924c-4a9a-af20-33c1185e87fe/status?branch=master)](https://app.codeship.com/projects/443436)
+[![Codeship Status for tjswierzewski/geardb](https://app.codeship.com/projects/f49c3404-924c-4a9a-af20-33c1185e87fe/status?branch=main)](https://app.codeship.com/projects/443436)
