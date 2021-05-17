@@ -71,6 +71,7 @@ const Layout = ({ user, setUser, removeUser, children }) => {
             <ChevronLeftIcon />
           </IconButton>
         </div>
+        <div style={{ marginTop: '.7rem' }}></div>
         <IconButton
           color="inherit"
           aria-label="open drawer"
