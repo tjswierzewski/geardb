@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const classes = useStyles;
 
-const CaseForm = ({ addCase }) => {
+const CaseForm = ({ addCase, currentUser }) => {
   const postCase = async (casePayload) => {
     try {
       const response = await fetch('/api/v1/cases', {

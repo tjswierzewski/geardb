@@ -88,7 +88,7 @@ const CaseContainer = ({ selectedCase, setSelectedCase, selectedTour, currentUse
   return (
     <div>
       {adding ? (
-        <CaseForm addCase={addCase} />
+        <CaseForm addCase={addCase} currentUser={currentUser} />
       ) : (
         <CaseIndex cases={cases} setSelectedCase={setSelectedCase} selectedCase={selectedCase} />
       )}

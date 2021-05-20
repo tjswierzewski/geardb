@@ -123,7 +123,11 @@ const GearContainer = ({ selectedCase, selectedTour, currentUser, setUser }) => 
 
   return (
     <div>
-      {adding ? <GearForm addElectronic={addElectronic} /> : <GearIndex electronics={electronics} />}
+      {adding ? (
+        <GearForm addElectronic={addElectronic} currentUser={currentUser} />
+      ) : (
+        <GearIndex electronics={electronics} />
+      )}
       <Fab color="primary" aria-label="add" size="large" onClick={changeAdding}>
         <AddIcon />
       </Fab>

@@ -54,7 +54,7 @@ const TourContainer = ({ selectedTour, setSelectedTour, currentUser, setUser }) 
   return (
     <div>
       {adding ? (
-        <TourForm addTour={addTour} />
+        <TourForm addTour={addTour} currentUser={currentUser} />
       ) : (
         <TourIndex tours={tours} selectedTour={selectedTour} setSelectedTour={setSelectedTour} />
       )}

@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const classes = useStyles;
 
-const TourForm = ({ addTour }) => {
+const TourForm = ({ addTour, currentUser }) => {
   const postTour = async (tourPayload) => {
     try {
       const response = await fetch('/api/v1/tours', {
