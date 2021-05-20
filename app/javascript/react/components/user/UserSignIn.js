@@ -18,8 +18,8 @@ const UserSignIn = ({ setUser }) => {
         Sign In
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Sign Up</DialogTitle>
-        <DialogContentText>Please sign up to use these services</DialogContentText>
+        <DialogTitle id="form-dialog-title">Sign In</DialogTitle>
+        <DialogContentText>Please sign in to use these services</DialogContentText>
         <UserSignInForm handleClose={handleClose} setUser={setUser} />
       </Dialog>
     </div>

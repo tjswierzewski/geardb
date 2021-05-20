@@ -31,7 +31,7 @@ const CaseContainer = ({ selectedCase, setSelectedCase, selectedTour, currentUse
         throw new Error(errorMessage);
       }
       const responseBody = await response.json();
-      setCases(responseBody);
+      setCases(responseBody.cases);
       const headers = response.headers;
       const user = {
         accessToken: headers.get('access-token'),

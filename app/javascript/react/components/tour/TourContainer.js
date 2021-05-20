@@ -32,7 +32,7 @@ const TourContainer = ({ selectedTour, setSelectedTour, currentUser, setUser }) 
         throw new Error(errorMessage);
       }
       const responseBody = await response.json();
-      setTours(responseBody);
+      setTours(responseBody.tours);
       const headers = response.headers;
       const user = {
         accessToken: headers.get('access-token'),

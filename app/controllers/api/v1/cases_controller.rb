@@ -1,7 +1,12 @@
 class Api::V1::CasesController < ApplicationController
   before_action :authenticate_api_v1_user!
   def index
-    render json: Case.all
+    shop = current_api_v1_user.shop
+    cases =
+      shop.cases.map do |road_case|
+        ActiveModelSerializers::SerializableResource.new(road_case, { serializer: CaseSerializer })
+      end
+    render json: { cases: cases }
   end
 
   def create

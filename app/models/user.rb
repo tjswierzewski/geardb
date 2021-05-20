@@ -10,13 +10,15 @@ class User < ApplicationRecord
   private
 
   def create_shop
-    self[:shop_id] =
-      Shop.create(
-        name: Faker::Company.name,
-        address: '123 Main st',
-        city: 'Boston',
-        state: 'MA',
-        zipcode: '02135'
-      ).id
+    if self[:shop_id] == nil
+      self[:shop_id] =
+        Shop.create(
+          name: Faker::Company.name,
+          address: '123 Main st',
+          city: 'Boston',
+          state: 'MA',
+          zipcode: '02135'
+        ).id
+    end
   end
 end
