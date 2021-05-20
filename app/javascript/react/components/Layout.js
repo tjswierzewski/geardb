@@ -33,7 +33,7 @@ const Layout = ({ user, setUser, removeUser, children }) => {
           </div>
           <div className={classes.userActions}>
             {user ? null : <UserSignIn setUser={setUser} />}
-            {user ? null : <UserSignup />}
+            {user ? null : <UserSignup setUser={setUser} />}
             {user ? <UserLogOut user={user} removeUser={removeUser} /> : null}
           </div>
         </Toolbar>
