@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import TourIndex from './TourIndex';
 import TourForm from './TourForm';
 
-const TourContainer = ({ selectedTour, setSelectedTour }) => {
+const TourContainer = ({ selectedTour, setSelectedTour, currentUser, setUser }) => {
   const [adding, setAdding] = useState(false);
   const [tours, setTours] = useState([]);
 
@@ -18,13 +18,30 @@ const TourContainer = ({ selectedTour, setSelectedTour }) => {
 
   const fetchTours = async () => {
     try {
-      const response = await fetch('/api/v1/tours');
+      const response = await fetch('/api/v1/tours', {
+        headers: {
+          'access-token': currentUser.accessToken,
+          'token-type': currentUser.tokenType,
+          client: currentUser.client,
+          expiry: currentUser.expiry,
+          uid: currentUser.uid
+        }
+      });
       if (!response.ok) {
         const errorMessage = `${response.status} (${response.statusText})`;
         throw new Error(errorMessage);
       }
       const responseBody = await response.json();
-      setTours(responseBody);
+      setTours(responseBody.tours);
+      const headers = response.headers;
+      const user = {
+        accessToken: headers.get('access-token'),
+        tokenType: headers.get('token-type'),
+        client: headers.get('client'),
+        expiry: headers.get('expiry'),
+        uid: headers.get('uid')
+      };
+      setUser(user);
     } catch (error) {
       console.error(`Error in Fetch: ${error.message}`);
     }
@@ -37,7 +54,7 @@ const TourContainer = ({ selectedTour, setSelectedTour }) => {
   return (
     <div>
       {adding ? (
-        <TourForm addTour={addTour} />
+        <TourForm addTour={addTour} currentUser={currentUser} />
       ) : (
         <TourIndex tours={tours} selectedTour={selectedTour} setSelectedTour={setSelectedTour} />
       )}

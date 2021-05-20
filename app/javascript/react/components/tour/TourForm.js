@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const classes = useStyles;
 
-const TourForm = ({ addTour }) => {
+const TourForm = ({ addTour, currentUser }) => {
   const postTour = async (tourPayload) => {
     try {
       const response = await fetch('/api/v1/tours', {
@@ -21,7 +21,12 @@ const TourForm = ({ addTour }) => {
         method: 'POST',
         headers: {
           Accept: 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'access-token': currentUser.accessToken,
+          'token-type': currentUser.tokenType,
+          client: currentUser.client,
+          expiry: currentUser.expiry,
+          uid: currentUser.uid
         },
         body: JSON.stringify(tourPayload)
       });

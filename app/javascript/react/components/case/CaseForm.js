@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const classes = useStyles;
 
-const CaseForm = ({ addCase }) => {
+const CaseForm = ({ addCase, currentUser }) => {
   const postCase = async (casePayload) => {
     try {
       const response = await fetch('/api/v1/cases', {
@@ -18,7 +18,12 @@ const CaseForm = ({ addCase }) => {
         method: 'POST',
         headers: {
           Accept: 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'access-token': currentUser.accessToken,
+          'token-type': currentUser.tokenType,
+          client: currentUser.client,
+          expiry: currentUser.expiry,
+          uid: currentUser.uid
         },
         body: JSON.stringify(casePayload)
       });

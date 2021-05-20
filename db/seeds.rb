@@ -1,40 +1,63 @@
 Faker::UniqueGenerator.clear
 
-test_user = User.new(email: 'thisismail@gmail.com', password: 'testing')
+shop =
+  Shop.create(
+    name: 'Audio Picture',
+    address: '4 Jersey St',
+    city: 'Boston',
+    state: 'MA',
+    zipcode: '02215'
+  )
+
+test_user = User.new(email: 'thisismail@gmail.com', password: 'testing', shop: shop)
 test_user.save
 
 t1 =
   Tour.create(
     name: 'The Magical Mystery Tour',
     artist: 'The Beatles',
-    duration: Faker::Date.backward(days: 250)..Faker::Date.forward(days: 250)
+    duration: Faker::Date.backward(days: 250)..Faker::Date.forward(days: 250),
+    shop: shop
   )
 t2 =
   Tour.create(
     name: 'Not In This Life Time',
     artist: 'Guns and Roses',
-    duration: Faker::Date.backward(days: 250)..Faker::Date.forward(days: 250)
+    duration: Faker::Date.backward(days: 250)..Faker::Date.forward(days: 250),
+    shop: shop
   )
 t3 =
   Tour.create(
     name: 'Stop Making Sense',
     artist: 'Talk Heads',
-    duration: Faker::Date.backward(days: 250)..Faker::Date.forward(days: 250)
+    duration: Faker::Date.backward(days: 250)..Faker::Date.forward(days: 250),
+    shop: shop
   )
 t4 =
   Tour.create(
     name: 'Turn It On Again',
     artist: 'Genesis',
-    duration: Faker::Date.backward(days: 250)..Faker::Date.forward(days: 250)
+    duration: Faker::Date.backward(days: 250)..Faker::Date.forward(days: 250),
+    shop: shop
   )
 t5 =
   Tour.create(
     name: 'Bridges to Babylon',
     artist: 'Rolling Stones',
-    duration: Faker::Date.backward(days: 250)..Faker::Date.forward(days: 250)
+    duration: Faker::Date.backward(days: 250)..Faker::Date.forward(days: 250),
+    shop: shop
   )
 
-c1 = Case.create(prefix: 'M32', case_number: 1, height: 48, length: 24, width: 24, weight: 180)
+c1 =
+  Case.create(
+    prefix: 'M32',
+    case_number: 1,
+    height: 48,
+    length: 24,
+    width: 24,
+    weight: 180,
+    shop: shop
+  )
 c2 =
   Case.create(
     prefix: 'WC',
@@ -42,7 +65,8 @@ c2 =
     height: 48,
     length: 24,
     width: 24,
-    weight: 180
+    weight: 180,
+    shop: shop
   )
 c1.tours << t1
 c1.save
@@ -55,7 +79,8 @@ c1.save
     height: 48,
     length: 24,
     width: 24,
-    weight: 180
+    weight: 180,
+    shop: shop
   )
 end
 
@@ -189,3 +214,6 @@ e10 =
     barcode: Faker::Barcode.unique.ean,
     case: c2
   )
+
+[e1, e2, e3, e4, e5, e6, e7, e8, e9, e10].each { |e| shop.electronics << e }
+shop.save

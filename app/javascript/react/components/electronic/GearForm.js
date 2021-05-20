@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const classes = useStyles;
 
-const GearForm = ({ addElectronic }) => {
+const GearForm = ({ addElectronic, currentUser }) => {
   const postElectronic = async (electronicPayload) => {
     try {
       const response = await fetch('/api/v1/electronics', {
@@ -18,7 +18,12 @@ const GearForm = ({ addElectronic }) => {
         method: 'POST',
         headers: {
           Accept: 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'access-token': currentUser.accessToken,
+          'token-type': currentUser.tokenType,
+          client: currentUser.client,
+          expiry: currentUser.expiry,
+          uid: currentUser.uid
         },
         body: JSON.stringify(electronicPayload)
       });
@@ -143,16 +148,16 @@ const GearForm = ({ addElectronic }) => {
         />
 
         <TextField
-          id="frimware_version"
-          name="frimware_version"
-          label="Frimware Version"
+          id="firmware_version"
+          name="firmware_version"
+          label="Firmware Version"
           color="secondary"
           variant="outlined"
           fullWidth
-          value={formik.values.frimware_version}
+          value={formik.values.firmware_version}
           onChange={formik.handleChange}
-          error={formik.touched.frimware_version && Boolean(formik.errors.frimware_version)}
-          helperText={formik.touched.frimware_version && formik.errors.frimware_version}
+          error={formik.touched.firmware_version && Boolean(formik.errors.firmware_version)}
+          helperText={formik.touched.firmware_version && formik.errors.firmware_version}
         />
 
         <TextField

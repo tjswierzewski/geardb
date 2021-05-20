@@ -1,20 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::ToursController, type: :controller do
+  let!(:user) { FactoryBot.create(:user) }
   let!(:tours) { FactoryBot.create_list(:tour, 5) }
 
   describe 'GET#index' do
     it 'should return a list of all cases' do
+      request.headers.merge! user.create_new_auth_token
       get :index
       returned_json = JSON.parse(response.body)
 
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json')
 
-      expect(returned_json.length).to eq 5
-      expect(returned_json[0]['name']).to be_truthy
-      expect(returned_json[0]['artist']).to be_truthy
-      expect(returned_json[0]['duration']).to be_falsey
+      expect(returned_json['tours'].length).to eq 5
+      expect(returned_json['tours'][0]['name']).to be_truthy
+      expect(returned_json['tours'][0]['artist']).to be_truthy
+      expect(returned_json['tours'][0]['duration']).to be_falsey
     end
   end
 
@@ -29,11 +31,13 @@ RSpec.describe Api::V1::ToursController, type: :controller do
 
     it 'creates a new tour' do
       prev_count = Tour.count
+      request.headers.merge! user.create_new_auth_token
       post(:create, params: post_json, format: :json)
       expect(Tour.count).to eq(prev_count + 1)
     end
 
-    it 'returns a persisted electronic' do
+    it 'returns a persisted tour' do
+      request.headers.merge! user.create_new_auth_token
       post(:create, params: post_json, format: :json)
       returned_json = JSON.parse(response.body)
 
@@ -46,7 +50,8 @@ RSpec.describe Api::V1::ToursController, type: :controller do
       expect(returned_json['artist']).to eq 'The Beatles'
     end
 
-    it 'does not create an electronic when incorrect data is recieved.' do
+    it 'does not create an tour when incorrect data is recieved.' do
+      request.headers.merge! user.create_new_auth_token
       post(:create, params: post_error, format: :json)
       returned_json = JSON.parse(response.body)
 
@@ -66,6 +71,7 @@ RSpec.describe Api::V1::ToursController, type: :controller do
     let!(:assignment2) { CaseAssignment.create(case: case2, tour: tour1) }
     let!(:assignment3) { CaseAssignment.create(case: case3, tour: tour1) }
     it 'gets the casess that are in a tour' do
+      request.headers.merge! user.create_new_auth_token
       get :contents, params: { id: tour1.id }
       returned_json = JSON.parse(response.body)
 
@@ -94,6 +100,7 @@ RSpec.describe Api::V1::ToursController, type: :controller do
     let!(:electronics4) { FactoryBot.create(:electronic, case: case2) }
     let!(:electronics5) { FactoryBot.create(:electronic, case: case3) }
     it 'gets the electronics that are in a case' do
+      request.headers.merge! user.create_new_auth_token
       get :items, params: { id: tour1.id }
       returned_json = JSON.parse(response.body)
 
