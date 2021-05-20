@@ -82,11 +82,11 @@ const GearContainer = ({ selectedCase, selectedTour, currentUser, setUser }) => 
     try {
       const response = await fetch(`/api/v1/tours/${selectedTour}/items`, {
         headers: {
-          'access-token': user.accessToken,
-          'token-type': user.tokenType,
-          client: user.client,
-          expiry: user.expiry,
-          uid: user.uid
+          'access-token': currentUser.accessToken,
+          'token-type': currentUser.tokenType,
+          client: currentUser.client,
+          expiry: currentUser.expiry,
+          uid: currentUser.uid
         }
       });
       if (!response.ok) {
@@ -105,7 +105,7 @@ const GearContainer = ({ selectedCase, selectedTour, currentUser, setUser }) => 
       };
       setUser(user);
     } catch (error) {
-      console.error(`Error in Fetch: ${error.message}`);
+      console.error(`Error in Fetch: ${error}`);
     }
   };
 
