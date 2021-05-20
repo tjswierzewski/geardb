@@ -11,6 +11,7 @@ class Api::V1::ToursController < ApplicationController
 
   def create
     tour = Tour.new(tour_params)
+    tour.shop = current_api_v1_user.shop
     if tour.save
       render json: tour, serializer: TourSerializer
     else
