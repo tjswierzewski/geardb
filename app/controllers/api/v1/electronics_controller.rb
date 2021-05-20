@@ -1,5 +1,5 @@
 class Api::V1::ElectronicsController < ApplicationController
-  before_action :authenticate_api_v1_user!
+  before_action :authenticate_api_v1_user!, except: [:add]
   def index
     shop = current_api_v1_user.shop
     electronics =
@@ -14,6 +14,7 @@ class Api::V1::ElectronicsController < ApplicationController
 
   def create
     new_electronic = Electronic.new(electronic_params)
+    new_electronic.shops = [current_api_v1_user.shop]
     if new_electronic.save
       render json: new_electronic, serializer: ElectronicSerializer
     else

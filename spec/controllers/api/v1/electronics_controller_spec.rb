@@ -1,22 +1,24 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::ElectronicsController, type: :controller do
+  let!(:user) { FactoryBot.create(:user) }
   let!(:electronics) { FactoryBot.create_list(:electronic, 5) }
 
   describe 'GET#index' do
     it 'returns a list of all electronics' do
+      request.headers.merge! user.create_new_auth_token
       get :index
       returned_json = JSON.parse(response.body)
 
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json')
 
-      expect(returned_json.length).to eq 5
-      expect(returned_json[0]['name']).to be_truthy
-      expect(returned_json[0]['model_number']).to be_truthy
-      expect(returned_json[0]['barcode']).to be_truthy
-      expect(returned_json[0]['serial_number']).to be_falsey
-      expect(returned_json[0]['cost']).to be_falsey
+      expect(returned_json['electronics'].length).to eq 5
+      expect(returned_json['electronics'][0]['name']).to be_truthy
+      expect(returned_json['electronics'][0]['model_number']).to be_truthy
+      expect(returned_json['electronics'][0]['barcode']).to be_truthy
+      expect(returned_json['electronics'][0]['serial_number']).to be_falsey
+      expect(returned_json['electronics'][0]['cost']).to be_falsey
     end
   end
 
@@ -32,11 +34,13 @@ RSpec.describe Api::V1::ElectronicsController, type: :controller do
 
     it 'creates a new electronic' do
       prev_count = Electronic.count
+      request.headers.merge! user.create_new_auth_token
       post(:create, params: post_json, format: :json)
       expect(Electronic.count).to eq(prev_count + 1)
     end
 
     it 'returns a persisted electronic' do
+      request.headers.merge! user.create_new_auth_token
       post(:create, params: post_json, format: :json)
       returned_json = JSON.parse(response.body)
 
@@ -51,6 +55,7 @@ RSpec.describe Api::V1::ElectronicsController, type: :controller do
     end
 
     it 'does not create an electronic when incorrect data is recieved.' do
+      request.headers.merge! user.create_new_auth_token
       post(:create, params: post_error, format: :json)
       returned_json = JSON.parse(response.body)
 
