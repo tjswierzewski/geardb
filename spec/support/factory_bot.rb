@@ -1,10 +1,19 @@
 require 'factory_bot'
 
 FactoryBot.define do
+  factory :shop do
+    name { Faker::Company.name }
+    address { '123 Main st' }
+    city { 'Boston' }
+    state { 'MA' }
+    zipcode { '02135' }
+  end
+
   factory :user do
     sequence(:email) { |n| "user#{n}@example.com" }
     password { 'password' }
     password_confirmation { 'password' }
+    shop { Shop.first || association(:shop) }
   end
 
   Faker::UniqueGenerator.clear
@@ -17,6 +26,7 @@ FactoryBot.define do
     firmware_version { Faker::Internet.ip_v4_address }
     software_version { Faker::Computer.os }
     barcode { Faker::Barcode.ean }
+    shops { [Shop.first] || association(:shops) }
   end
 
   factory :case do
@@ -26,11 +36,13 @@ FactoryBot.define do
     length { 24 }
     width { 24 }
     weight { 180 }
+    shop { Shop.first || association(:shop) }
   end
 
   factory :tour do
     name { Faker::Esport.event }
     artist { Faker::Kpop.boy_bands }
     duration { Faker::Date.backward(days: 250)..Faker::Date.forward(days: 250) }
+    shop { Shop.first || association(:shop) }
   end
 end
