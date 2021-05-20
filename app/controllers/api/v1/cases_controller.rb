@@ -1,5 +1,5 @@
 class Api::V1::CasesController < ApplicationController
-  before_action :authenticate_api_v1_user!
+  before_action :authenticate_api_v1_user!, except: [:add]
   def index
     shop = current_api_v1_user.shop
     cases =
@@ -11,6 +11,7 @@ class Api::V1::CasesController < ApplicationController
 
   def create
     new_case = Case.new(case_params)
+    new_case.shop = current_api_v1_user.shop
     if new_case.save
       render json: new_case, serializer: CaseSerializer
     else
