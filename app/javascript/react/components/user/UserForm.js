@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const classes = useStyles;
 
-const UserForm = ({ handleClose }) => {
+const UserForm = ({ handleClose, setUser }) => {
   const postUser = async (userInfo) => {
     const userPayload = { ...userInfo, confirm_success_url: '/' };
     try {
@@ -27,7 +27,15 @@ const UserForm = ({ handleClose }) => {
         const errorMessage = `${response.status} (${response.statusText})`;
         throw new Error(errorMessage);
       }
-      const responseBody = await response.json();
+      const headers = response.headers;
+      const user = {
+        accessToken: headers.get('access-token'),
+        tokenType: headers.get('token-type'),
+        client: headers.get('client'),
+        expiry: headers.get('expiry'),
+        uid: headers.get('uid')
+      };
+      setUser(user);
       handleClose();
     } catch (error) {
       console.error(`Error in Fetch: ${error.message}`);
