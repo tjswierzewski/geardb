@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const classes = useStyles;
 
-const UserForm = ({ handleClose, setUser }) => {
+const UserForm = ({ handleClose, setUser, setErrors }) => {
   const postUser = async (userInfo) => {
     const userPayload = { ...userInfo, confirm_success_url: '/' };
     try {
@@ -23,20 +23,29 @@ const UserForm = ({ handleClose, setUser }) => {
         },
         body: JSON.stringify(userPayload)
       });
-      if (!response.ok) {
-        const errorMessage = `${response.status} (${response.statusText})`;
-        throw new Error(errorMessage);
+      switch (response.status) {
+        case 200:
+          const headers = response.headers;
+          const user = {
+            accessToken: headers.get('access-token'),
+            tokenType: headers.get('token-type'),
+            client: headers.get('client'),
+            expiry: headers.get('expiry'),
+            uid: headers.get('uid')
+          };
+          setUser(user);
+          handleClose();
+          break;
+
+        case 422:
+          const responseBody = await response.json();
+          setErrors(responseBody.errors.full_messages);
+          break;
+
+        default:
+          const errorMessage = `${response.status} (${response.statusText})`;
+          throw new Error(errorMessage);
       }
-      const headers = response.headers;
-      const user = {
-        accessToken: headers.get('access-token'),
-        tokenType: headers.get('token-type'),
-        client: headers.get('client'),
-        expiry: headers.get('expiry'),
-        uid: headers.get('uid')
-      };
-      setUser(user);
-      handleClose();
     } catch (error) {
       console.error(`Error in Fetch: ${error.message}`);
     }
