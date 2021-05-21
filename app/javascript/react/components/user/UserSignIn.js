@@ -20,6 +20,7 @@ const UserSignIn = ({ setUser }) => {
 
   const handleClose = () => {
     setOpen(false);
+    setErrors({});
   };
 
   return (
