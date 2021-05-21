@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const classes = useStyles;
 
-const UserSignInForm = ({ handleClose, setUser }) => {
+const UserSignInForm = ({ handleClose, setUser, setErrors }) => {
   const signInUser = async (userInfo) => {
     try {
       const response = await fetch('/api/v1/auth/sign_in', {
@@ -22,20 +22,29 @@ const UserSignInForm = ({ handleClose, setUser }) => {
         },
         body: JSON.stringify(userInfo)
       });
-      if (!response.ok) {
-        const errorMessage = `${response.status} (${response.statusText})`;
-        throw new Error(errorMessage);
+      switch (response.status) {
+        case 200:
+          const headers = response.headers;
+          const user = {
+            accessToken: headers.get('access-token'),
+            tokenType: headers.get('token-type'),
+            client: headers.get('client'),
+            expiry: headers.get('expiry'),
+            uid: headers.get('uid')
+          };
+          setUser(user);
+          handleClose();
+          break;
+
+        case 401:
+          const responseBody = await response.json();
+          setErrors(responseBody);
+          break;
+
+        default:
+          const errorMessage = `${response.status} (${response.statusText})`;
+          throw new Error(errorMessage);
       }
-      const headers = response.headers;
-      const user = {
-        accessToken: headers.get('access-token'),
-        tokenType: headers.get('token-type'),
-        client: headers.get('client'),
-        expiry: headers.get('expiry'),
-        uid: headers.get('uid')
-      };
-      setUser(user);
-      handleClose();
     } catch (error) {
       console.error(`Error in Fetch: ${error.message}`);
     }
