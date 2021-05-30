@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import clsx from 'clsx';
 import useStyles from '../styles/useStyles';
 import Drawer from '@material-ui/core/Drawer';
@@ -18,8 +18,10 @@ import UserSignIn from './user/UserSignIn';
 import UserSignup from './user/UserSignup';
 import UserLogOut from './user/UserLogOut';
 import logo from '../../../assets/images/logo_size_invert';
+import { UserContext } from './UserContext';
 
-const Layout = ({ user, setUser, removeUser, children }) => {
+const Layout = ({ children }) => {
+  const { user } = useContext(UserContext);
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -32,9 +34,9 @@ const Layout = ({ user, setUser, removeUser, children }) => {
             <img src={logo} alt="logo" style={{ padding: '.45rem' }} />
           </div>
           <div className={classes.userActions}>
-            {user ? null : <UserSignIn setUser={setUser} />}
-            {user ? null : <UserSignup setUser={setUser} />}
-            {user ? <UserLogOut user={user} removeUser={removeUser} /> : null}
+            {user ? null : <UserSignIn />}
+            {user ? null : <UserSignup />}
+            {user ? <UserLogOut /> : null}
           </div>
         </Toolbar>
       </AppBar>

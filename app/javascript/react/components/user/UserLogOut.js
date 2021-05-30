@@ -1,7 +1,9 @@
 import { Button } from '@material-ui/core';
-import React from 'react';
+import React, { useContext } from 'react';
+import { UserContext } from '../UserContext';
 
-const UserLogOut = ({ user, removeUser }) => {
+const UserLogOut = () => {
+  const { user, removeUser } = useContext(UserContext);
   const handleLogOut = async () => {
     const userPayLoad = {
       ['uid']: user.uid,

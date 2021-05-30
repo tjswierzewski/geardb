@@ -9,7 +9,7 @@ const useStyles = makeStyles({
   }
 });
 
-const UserSignIn = ({ setUser }) => {
+const UserSignIn = () => {
   const [open, setOpen] = useState(false);
   const [errors, setErrors] = useState({});
   const classes = useStyles();
@@ -34,7 +34,7 @@ const UserSignIn = ({ setUser }) => {
         <DialogContentText className={classes.error}>
           {_.isEmpty(errors) ? null : errors.errors[0]}
         </DialogContentText>
-        <UserSignInForm handleClose={handleClose} setUser={setUser} setErrors={setErrors} />
+        <UserSignInForm handleClose={handleClose} setErrors={setErrors} />
       </Dialog>
     </div>
   );

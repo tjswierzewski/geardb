@@ -20,7 +20,7 @@ const useStyles = makeStyles({
 const LandingPage = () => {
   const classes = useStyles();
   return (
-    <Paper className={classes.root} elevation="3">
+    <Paper className={classes.root} elevation={3}>
       <Typography variant="h1" align="center">
         Welcome to Geardb
       </Typography>

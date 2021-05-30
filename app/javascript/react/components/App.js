@@ -1,63 +1,23 @@
 import React, { useState } from 'react';
 import theme from '../themes/theme';
 import { ThemeProvider } from '@material-ui/core/styles';
-import { Grid, Paper, Typography } from '@material-ui/core';
-import CaseContainer from './case/CaseContainer';
-import GearContainer from './electronic/GearContainer';
 import Layout from './Layout';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import TourContainer from './tour/TourContainer';
-import useUser from '../logic/useUser';
-import LandingPage from '../components/info/LandingPage';
+import { UserProvider } from './UserContext';
+import ContentGrid from './ContentGrid';
 
 const App = () => {
-  const { user, setUser, removeUser } = useUser();
-  const [selectedCase, setSelectedCase] = useState(null);
-  const [selectedTour, setSelectedTour] = useState(null);
-
-  const display = () => {
-    if (user) {
-      return (
-        <Grid container>
-          <Grid item xs={4}>
-            <TourContainer
-              selectedTour={selectedTour}
-              setSelectedTour={setSelectedTour}
-              currentUser={user}
-              setUser={setUser}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <CaseContainer
-              selectedCase={selectedCase}
-              setSelectedCase={setSelectedCase}
-              selectedTour={selectedTour}
-              currentUser={user}
-              setUser={setUser}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <GearContainer
-              selectedCase={selectedCase}
-              selectedTour={selectedTour}
-              currentUser={user}
-              setUser={setUser}
-            />
-          </Grid>
-        </Grid>
-      );
-    }
-    return <LandingPage />;
-  };
   return (
-    <ThemeProvider theme={theme}>
-      <DndProvider backend={HTML5Backend}>
-        <Layout user={user} setUser={setUser} removeUser={removeUser}>
-          {display()}
-        </Layout>
-      </DndProvider>
-    </ThemeProvider>
+    <UserProvider>
+      <ThemeProvider theme={theme}>
+        <DndProvider backend={HTML5Backend}>
+          <Layout>
+            <ContentGrid />
+          </Layout>
+        </DndProvider>
+      </ThemeProvider>
+    </UserProvider>
   );
 };
 
