@@ -1,5 +1,5 @@
 import { Button, Dialog, DialogContentText, DialogTitle, makeStyles } from '@material-ui/core';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import UserForm from './UserForm';
 
 const useStyles = makeStyles({

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import theme from '../themes/theme';
 import { ThemeProvider } from '@material-ui/core/styles';
-
 import Layout from './Layout';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
