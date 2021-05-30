@@ -1,5 +1,5 @@
 import { Button, Dialog, DialogContentText, DialogTitle, makeStyles } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import UserSignInForm from './UserSignInForm';
 import _ from 'lodash';
 
@@ -9,7 +9,7 @@ const useStyles = makeStyles({
   }
 });
 
-const UserSignIn = ({ setUser }) => {
+const UserSignIn = () => {
   const [open, setOpen] = useState(false);
   const [errors, setErrors] = useState({});
   const classes = useStyles();
@@ -34,7 +34,7 @@ const UserSignIn = ({ setUser }) => {
         <DialogContentText className={classes.error}>
           {_.isEmpty(errors) ? null : errors.errors[0]}
         </DialogContentText>
-        <UserSignInForm handleClose={handleClose} setUser={setUser} setErrors={setErrors} />
+        <UserSignInForm handleClose={handleClose} setErrors={setErrors} />
       </Dialog>
     </div>
   );
