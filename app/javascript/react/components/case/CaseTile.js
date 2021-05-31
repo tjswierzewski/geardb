@@ -27,6 +27,16 @@ const useStyles = makeStyles({
   },
   selected: {
     backgroundColor: '#5fe39c'
+  },
+  tile: {
+    cursor: 'move',
+    opacity: 1
+  },
+  dragging: {
+    opacity: 0.5
+  },
+  over: {
+    backgroundColor: '#abecc9'
   }
 });
 const CaseTile = ({ prefix, case_number, id, selected }) => {
@@ -50,8 +60,11 @@ const CaseTile = ({ prefix, case_number, id, selected }) => {
   }));
   drag(drop(ref));
   return (
-    <div ref={ref}>
-      <Card className={clsx(classes.root, { [classes.selected]: selected })} variant="outlined">
+    <div ref={ref} className={clsx(classes.tile, { [classes.dragging]: isDragging })}>
+      <Card
+        className={clsx(classes.root, { [classes.selected]: selected, [classes.over]: isOver })}
+        variant="outlined"
+      >
         <CardContent className={classes.content}>
           <Typography variant="h5" component="p" display="inline">
             {`${prefix}-${case_number}`}

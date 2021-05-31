@@ -25,6 +25,9 @@ const useStyles = makeStyles({
   },
   selected: {
     backgroundColor: '#5fe39c'
+  },
+  over: {
+    backgroundColor: '#abecc9'
   }
 });
 
@@ -41,7 +44,10 @@ const TourTile = ({ id, name, artist, selected }) => {
 
   return (
     <div ref={drop}>
-      <Card className={clsx(classes.root, { [classes.selected]: selected })} variant="outlined">
+      <Card
+        className={clsx(classes.root, { [classes.selected]: selected, [classes.over]: isOver })}
+        variant="outlined"
+      >
         <CardContent className={classes.content}>
           <Typography variant="h5" component="p" display="inline">
             {name}
