@@ -50,7 +50,7 @@ const CaseTile = ({ prefix, case_number, id, selected }) => {
   }));
   drag(drop(ref));
   return (
-    <div ref={ref}>
+    <div ref={ref} style={{ opacity: isDragging ? 0.5 : 1, cursor: 'move' }}>
       <Card className={clsx(classes.root, { [classes.selected]: selected })} variant="outlined">
         <CardContent className={classes.content}>
           <Typography variant="h5" component="p" display="inline">
