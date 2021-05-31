@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import ItemTypes from '../../constants/ItemTypes';
 import { useDrop, useDrag } from 'react-dnd';
 import postElectronictoCase from '../../logic/PostElectronicToCase';
+import { electronicInCase } from '../../logic/ElectronicInCase';
 
 const useStyles = makeStyles({
   root: {
@@ -39,7 +40,7 @@ const useStyles = makeStyles({
     backgroundColor: '#abecc9'
   }
 });
-const CaseTile = ({ prefix, case_number, id, selected }) => {
+const CaseTile = ({ prefix, case_number, id, electronics, selected }) => {
   const ref = useRef(null);
   const classes = useStyles();
 
@@ -51,18 +52,23 @@ const CaseTile = ({ prefix, case_number, id, selected }) => {
     })
   }));
 
-  const [{ isOver }, drop] = useDrop(() => ({
+  const [{ isOver, canDrop }, drop] = useDrop(() => ({
     accept: ItemTypes.ELECTRONIC,
     drop: (item) => postElectronictoCase(item.id, { id }),
+    canDrop: (item) => electronicInCase(electronics, item.id),
     collect: (monitor) => ({
-      isOver: !!monitor.isOver()
+      isOver: !!monitor.isOver(),
+      canDrop: !!monitor.canDrop()
     })
   }));
   drag(drop(ref));
   return (
     <div ref={ref} className={clsx(classes.tile, { [classes.dragging]: isDragging })}>
       <Card
-        className={clsx(classes.root, { [classes.selected]: selected, [classes.over]: isOver })}
+        className={clsx(classes.root, {
+          [classes.selected]: selected,
+          [classes.over]: canDrop && isOver
+        })}
         variant="outlined"
       >
         <CardContent className={classes.content}>
