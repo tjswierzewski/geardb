@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
 
 const CaseIndex = ({ cases, selectedCase, setSelectedCase }) => {
   const classes = useStyles();
-  const casesList = cases.map(({ id, prefix, case_number }) => {
+  const casesList = cases.map(({ id, prefix, case_number, electronics }) => {
     const handleSelect = () => {
       if (selectedCase === id) {
         setSelectedCase(null);
@@ -24,7 +24,13 @@ const CaseIndex = ({ cases, selectedCase, setSelectedCase }) => {
     const selected = selectedCase === id;
     return (
       <div key={id} onClick={handleSelect}>
-        <CaseTile id={id} prefix={prefix} case_number={case_number} selected={selected} />
+        <CaseTile
+          id={id}
+          prefix={prefix}
+          case_number={case_number}
+          selected={selected}
+          electronics={electronics}
+        />
       </div>
     );
   });

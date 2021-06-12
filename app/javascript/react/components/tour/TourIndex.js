@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
 
 const TourIndex = ({ tours, selectedTour, setSelectedTour }) => {
   const classes = useStyles();
-  const tourList = tours.map(({ id, name, artist }) => {
+  const tourList = tours.map(({ id, name, artist, cases }) => {
     const handleSelect = () => {
       if (selectedTour === id) {
         setSelectedTour(null);
@@ -24,7 +24,7 @@ const TourIndex = ({ tours, selectedTour, setSelectedTour }) => {
     const selected = selectedTour === id;
     return (
       <div key={id} onClick={handleSelect}>
-        <TourTile id={id} name={name} artist={artist} selected={selected} />
+        <TourTile id={id} name={name} artist={artist} selected={selected} cases={cases} />
       </div>
     );
   });
