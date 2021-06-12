@@ -5,6 +5,7 @@ import { Card, CardContent, Typography } from '@material-ui/core';
 import ItemTypes from '../../constants/ItemTypes';
 import { useDrop } from 'react-dnd';
 import postCasetoTour from '../../logic/PostCaseToTour';
+import { caseInTour } from '../../logic/CaseInTour';
 
 const useStyles = makeStyles({
   root: {
@@ -31,21 +32,26 @@ const useStyles = makeStyles({
   }
 });
 
-const TourTile = ({ id, name, artist, selected }) => {
+const TourTile = ({ id, name, artist, cases, selected }) => {
   const classes = useStyles();
 
-  const [{ isOver }, drop] = useDrop(() => ({
+  const [{ isOver, canDrop }, drop] = useDrop(() => ({
     accept: ItemTypes.CASE,
     drop: (item) => postCasetoTour(item.id, { id }),
+    canDrop: (item) => caseInTour(cases, item.id),
     collect: (monitor) => ({
-      isOver: !!monitor.isOver()
+      isOver: !!monitor.isOver(),
+      canDrop: !!monitor.canDrop()
     })
   }));
 
   return (
     <div ref={drop}>
       <Card
-        className={clsx(classes.root, { [classes.selected]: selected, [classes.over]: isOver })}
+        className={clsx(classes.root, {
+          [classes.selected]: selected,
+          [classes.over]: canDrop && isOver
+        })}
         variant="outlined"
       >
         <CardContent className={classes.content}>
